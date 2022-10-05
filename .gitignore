@@ -8,5 +8,5 @@ pyvenv.cfg
 *.pot
 *.pyc
 __pycache__
-portal/settings_local.py
+ageofpirates/settings_local.py
 media
