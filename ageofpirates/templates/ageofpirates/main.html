@@ -1,0 +1,25 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  {% include 'ageofpirates/main_head.html' %}
+
+  <body class="bg-dark">
+
+<main>
+  <div class="container py-4">
+
+    {% include 'ageofpirates/main_navbar.html' %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% include 'ageofpirates/main_footer.html' %}
+
+  </div>
+</main>
+
+  </body>
+
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+</html>

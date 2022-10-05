@@ -1,0 +1,12 @@
+# venv #
+Include
+Lib
+Scripts
+pyvenv.cfg
+
+# Django #
+*.pot
+*.pyc
+__pycache__
+portal/settings_local.py
+media

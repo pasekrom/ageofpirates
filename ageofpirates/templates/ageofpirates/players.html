@@ -1,0 +1,46 @@
+{% extends 'ageofpirates/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+  {% for object in object_list %}
+  {% if not object.jmeno == "AI" %}
+  <div class="col container p-3">
+    <div class="card">
+    <div class="user text-center">
+      <div class="profile p-3">
+        <img src="{{ object.img }}" class="rounded-circle" width="80">
+      </div>
+    </div>
+    <div class="mt-0 text-center">
+      <h4 class="mb-0">{{ object.jmeno }}</h4>
+      <a class="btn btn-outline-secondary btn-sm" href="{{ object.odkaz_statistika }}" target="_blank">Detailní statistiky</a>
+      <a class="btn btn-outline-secondary btn-sm" href="{{ object.odkaz_steam }}" target="_blank">Steam profil</a>
+      <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+        <div class="stats">
+          <h6 class="mb-0">Hry</h6>
+          <span>626</span>
+        </div>
+        <div class="stats">
+          <h6 class="mb-0">W/L</h6>
+          <span>62.6%</span>
+        </div>
+        <div class="stats">
+          <h6 class="mb-0">Win Streak</h6>
+          <span>2</span>
+        </div>
+        <div class="stats">
+          <h6 class="mb-0">Rank</h6>
+          <span>#1</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+</div>
+
+{% endblock %}
