@@ -15,24 +15,24 @@
     </div>
     <div class="mt-0 text-center">
       <h4 class="mb-0">{{ object.jmeno }}</h4>
-      <a class="btn btn-outline-secondary btn-sm" href="{{ object.odkaz_statistika }}" target="_blank">Detailní statistiky</a>
-      <a class="btn btn-outline-secondary btn-sm" href="{{ object.odkaz_steam }}" target="_blank">Steam profil</a>
+      <a class="btn btn-outline-secondary btn-sm" href="{{ object.statistika }}" target="_blank">Detailní statistiky</a>
+      {% if not object.steam = 'NULL' %}<a class="btn btn-outline-secondary btn-sm" href="{{ object.steam }}" target="_blank">Steam profil</a>{% endif %}
       <div class="d-flex justify-content-between align-items-center mt-4 px-4">
         <div class="stats">
           <h6 class="mb-0">Hry</h6>
-          <span>626</span>
+          <span>xxx</span>
         </div>
         <div class="stats">
           <h6 class="mb-0">W/L</h6>
-          <span>62.6%</span>
+          <span>xx.xx%</span>
         </div>
         <div class="stats">
           <h6 class="mb-0">Win Streak</h6>
-          <span>2</span>
+          <span>x</span>
         </div>
         <div class="stats">
           <h6 class="mb-0">Rank</h6>
-          <span>#1</span>
+          <span>#x</span>
         </div>
       </div>
     </div>
