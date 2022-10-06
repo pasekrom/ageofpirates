@@ -14,10 +14,10 @@
       </div>
     </div>
     <div class="mt-0 text-center">
-      <h4 class="mb-0">{{ object.jmeno }}</h4>
-      <a class="btn btn-outline-secondary btn-sm" href="{{ object.statistika }}" target="_blank">Detailní statistiky</a>
-      {% if not object.steam = 'NULL' %}<a class="btn btn-outline-secondary btn-sm" href="{{ object.steam }}" target="_blank">Steam profil</a>{% endif %}
-      <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+      <h4 class="mb-3">{{ object.jmeno }}</h4>
+      <a class="btn btn-outline-secondary btn-sm mx-1" href="{{ object.statistika }}" target="_blank">Detailní statistiky</a>
+      {% if not object.steam == "NULL" %}<a class="btn btn-outline-secondary btn-sm mx-1" href="{{ object.steam }}" target="_blank">Steam profil</a>{% endif %}
+      <div class="d-flex justify-content-between align-items-center mt-3 px-4 mb-2">
         <div class="stats">
           <h6 class="mb-0">Hry</h6>
           <span>xxx</span>
