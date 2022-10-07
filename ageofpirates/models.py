@@ -45,6 +45,7 @@ class Map(models.Model):
 class Match(models.Model):
     id = models.BigIntegerField(primary_key=True)
     datum_cas = models.DateTimeField(blank=True, null=True)
+    delka_hry = models.TimeField(blank=True, null=True)
     pocet_hracu = models.PositiveSmallIntegerField()
     pocet_tymu = models.PositiveSmallIntegerField(blank=True, null=True)
     p1 = models.ForeignKey(Player, blank=True, null=True, on_delete=models.SET_NULL, related_name = 'player1')
@@ -80,3 +81,10 @@ class Match(models.Model):
 
     def __str__(self):
         return f'{self.id}'
+
+class PlayerStat(models.Model):
+    hrac = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
+    hry = models.BigIntegerField(blank=True, null=True)
+    vyhry = models.BigIntegerField(blank=True, null=True)
+    prohry = models.BigIntegerField(blank=True, null=True)
+    rank = models.BigIntegerField(blank=True, null=True)

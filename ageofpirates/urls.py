@@ -5,7 +5,8 @@ from django.conf.urls.static import static
 from .views import (
     HomeView,
     PlayersView,
-    MatchesView
+    MatchesView,
+    StatsView
 )
 
 urlpatterns = [
@@ -13,4 +14,5 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('players/', PlayersView.as_view(), name='players'),
     path('games/', MatchesView.as_view(), name='matches'),
+    path('stats/', StatsView.as_view(), name='stats'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
