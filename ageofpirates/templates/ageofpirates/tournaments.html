@@ -1,0 +1,17 @@
+{% extends 'ageofpirates/main.html' %}
+{% load static %}
+{% block content %}
+
+  {% for object in object_list %}
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">{{ object.nazev }}</h5>
+      <a href="/tournaments/{{ object.id }}" class="btn btn-outline-secondary">Detail turnaje</a>
+    </div>
+    <div class="card-footer text-muted">
+      {{ object.datum_zahajeni }}{% if object.vitez is not NULL %} | Vítěz: {{ object.vitez }}{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}

@@ -6,7 +6,9 @@ from .views import (
     HomeView,
     PlayersView,
     MatchesView,
-    StatsView
+    StatsView,
+    TournamentsView,
+    TournamentsDetailView
 )
 
 urlpatterns = [
@@ -15,4 +17,6 @@ urlpatterns = [
     path('players/', PlayersView.as_view(), name='players'),
     path('games/', MatchesView.as_view(), name='matches'),
     path('stats/', StatsView.as_view(), name='stats'),
+    path('tournaments/', TournamentsView.as_view(), name='tournaments'),
+    path('tournaments/<pk>', TournamentsDetailView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

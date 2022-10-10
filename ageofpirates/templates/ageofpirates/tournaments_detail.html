@@ -1,0 +1,226 @@
+{% extends 'ageofpirates/main.html' %}
+{% load static %}
+{% block content %}
+
+
+  <div class="card text-center">
+    <div class="card-header">
+      <h5 class="card-title mt-2">{{ object.nazev }}</h5>
+    </div>
+    <div class="card-body">
+
+      <main id="tournament" class="d-flex justify-content-center">
+        <style>
+          /*
+           *  Flex Layout Specifics
+          */
+          main{
+            display:flex;
+            flex-direction:row;
+          }
+          .round{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            width:200px;
+            list-style:none;
+            padding:0;
+          }
+            .round .spacer{ flex-grow:1; }
+            .round .spacer:first-child,
+            .round .spacer:last-child{ flex-grow:.5; }
+
+            .round .game-spacer{
+              flex-grow:1;
+            }
+
+          /*
+           *  General Styles
+          */
+          body{
+            font-family:sans-serif;
+            font-size:small;
+            padding:10px;
+            line-height:1.4em;
+          }
+
+          li.game{
+            padding-left:20px;
+          }
+
+            li.game.winner{
+              font-weight:bold;
+            }
+            li.game span{
+              float:right;
+              margin-right:5px;
+            }
+
+            li.game-top{ border-bottom:1px solid #aaa; }
+
+            li.game-spacer{
+              border-right:1px solid #aaa;
+              min-height:40px;
+            }
+
+            li.game-bottom{
+              border-top:1px solid #aaa;
+            }
+        </style>
+        <ul class="round round-1">
+          <li class="spacer"><strong>Eighth-finals</strong></li><br>
+
+          <li class="game game-top {% if object.p1_score >= 2 %}winner{% endif %}">{% if object.p1 is not NULL %}{{ object.p1 }}{% else %}-{% endif %} <span>{% if object.p1_score is not NULL %}{{ object.p1_score }}{% endif %}</span></li>
+          <li class="game game-spacer">{% if object.p2 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}</li>
+          <li class="game game-bottom {% if object.p2_score >= 2 %}winner{% endif %}">{% if object.p2 is not NULL %}{{ object.p2 }}{% else %}-{% endif %} <span>{% if object.p2_score is not NULL %}{{ object.p2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.p3_score >= 2 %}winner{% endif %}">{% if object.p3 is not NULL %}{{ object.p3 }}{% else %}-{% endif %} <span>{% if object.p3_score is not NULL %}{{ object.p3_score }}{% endif %}</span></li>
+          <li class="game game-spacer">{% if object.p3 is not NULL and object.p4 is not NULL %}<a class="text-dark" href="#">detail série</a>{% elif object.p3 is NULL and object.p4 is NULL %}-{% else %}automatický postup{% endif %}</li>
+          <li class="game game-bottom {% if object.p4_score >= 2 %}winner{% endif %}">{% if object.p4 is not NULL %}{{ object.p4 }}{% else %}-{% endif %} <span>{% if object.p4_score is not NULL %}{{ object.p4_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.p5_score >= 2 %}winner{% endif %}">{% if object.p5 is not NULL %}{{ object.p5 }}{% else %}-{% endif %} <span>{% if object.p5_score is not NULL %}{{ object.p5_score }}{% endif %}</span></li>
+          <li class="game game-spacer">{% if object.p6 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-bottom {% if object.p6_score >= 2 %}winner{% endif %}">{% if object.p6 is not NULL %}{{ object.p6 }}{% else %}-{% endif %} <span>{% if object.p6_score is not NULL %}{{ object.p6_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.p7_score >= 2 %}winner{% endif %}">{% if object.p7 is not NULL %}{{ object.p7 }}{% else %}-{% endif %} <span>{% if object.p7_score is not NULL %}{{ object.p7_score }}{% endif %}</span></li>
+          <li class="game game-spacer">{% if object.p8 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-bottom {% if object.p8_score >= 2 %}winner{% endif %}">{% if object.p8 is not NULL %}{{ object.p8 }}{% else %}-{% endif %} <span>{% if object.p8_score is not NULL %}{{ object.p8_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.p9_score >= 2 %}winner{% endif %}">{% if object.p9 is not NULL %}{{ object.p9 }}{% else %}-{% endif %} <span>{% if object.p9_score is not NULL %}{{ object.p9_score }}{% endif %}</span></li>
+          <li class="game game-spacer">{% if object.p10 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-bottom {% if object.p10_score >= 2 %}winner{% endif %}">{% if object.p10 is not NULL %}{{ object.p10 }}{% else %}-{% endif %} <span>{% if object.p10_score is not NULL %}{{ object.p10_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.p11_score >= 2 %}winner{% endif %}">{% if object.p11 is not NULL %}{{ object.p11 }}{% else %}-{% endif %} <span>{% if object.p11_score is not NULL %}{{ object.p11_score }}{% endif %}</span></li>
+          <li class="game game-spacer">{% if object.p12 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-bottom {% if object.p12_score >= 2 %}winner{% endif %}">{% if object.p12 is not NULL %}{{ object.p12 }}{% else %}-{% endif %} <span>{% if object.p12_score is not NULL %}{{ object.p12_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.p13_score >= 2 %}winner{% endif %}">{% if object.p13 is not NULL %}{{ object.p13 }}{% else %}-{% endif %} <span>{% if object.p13_score is not NULL %}{{ object.p13_score }}{% endif %}</span></li>
+          <li class="game game-spacer">{% if object.p14 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-bottom {% if object.p14_score >= 2 %}winner{% endif %}">{% if object.p14 is not NULL %}{{ object.p14 }}{% else %}-{% endif %} <span>{% if object.p14_score is not NULL %}{{ object.p14_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.p15_score >= 2 %}winner{% endif %}">{% if object.p15 is not NULL %}{{ object.p15 }}{% else %}-{% endif %} <span>{% if object.p15_score is not NULL %}{{ object.p15_score }}{% endif %}</span></li>
+          <li class="game game-spacer">{% if object.p16 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-bottom {% if object.p16_score >= 2 %}winner{% endif %}">{% if object.p16 is not NULL %}{{ object.p16 }}{% else %}-{% endif %} <span>{% if object.p16_score is not NULL %}{{ object.p16_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+        </ul>
+        <ul class="round round-2">
+          <li class="spacer"><strong>Quarterfinals</strong></li><br>
+
+          <li class="game game-top {% if object.qfa1_score >= 2 %}winner{% endif %}">{% if object.qfa1 is not NULL %}{{ object.qfa1 }}{% else %}-{% endif %} <span>{% if object.qfa1_score is not NULL %}{{ object.qfa1_score }}{% endif %}</span></li>
+          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-bottom {% if object.qfa2_score >= 2 %}winner{% endif %}">{% if object.qfa2 is not NULL %}{{ object.qfa2 }}{% else %}-{% endif %} <span>{% if object.qfa2_score is not NULL %}{{ object.qfa2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.qfb1_score >= 2 %}winner{% endif %}">{% if object.qfb1 is not NULL %}{{ object.qfb1 }}{% else %}-{% endif %} <span>{% if object.qfb1_score is not NULL %}{{ object.qfb1_score }}{% endif %}</span></li>
+          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-bottom {% if object.qfb2_score >= 2 %}winner{% endif %}">{% if object.qfb2 is not NULL %}{{ object.qfb2 }}{% else %}-{% endif %} <span>{% if object.qfb2_score is not NULL %}{{ object.qfb2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.qfc1_score >= 2 %}winner{% endif %}">{% if object.qfc1 is not NULL %}{{ object.qfc1 }}{% else %}-{% endif %} <span>{% if object.qfc1_score is not NULL %}{{ object.qfc1_score }}{% endif %}</span></li>
+          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-bottom {% if object.qfc2_score >= 2 %}winner{% endif %}">{% if object.qfc2 is not NULL %}{{ object.qfc2 }}{% else %}-{% endif %} <span>{% if object.qfc2_score is not NULL %}{{ object.qfc2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.qfd1_score >= 2 %}winner{% endif %}">{% if object.qfd1 is not NULL %}{{ object.qfd1 }}{% else %}-{% endif %} <span>{% if object.qfd1_score is not NULL %}{{ object.qfd1_score }}{% endif %}</span></li>
+          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-bottom {% if object.qfd2_score >= 2 %}winner{% endif %}">{% if object.qfd2 is not NULL %}{{ object.qfd2 }}{% else %}-{% endif %} <span>{% if object.qfd2_score is not NULL %}{{ object.qfd2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+        </ul>
+        <ul class="round round-3">
+          <li class="spacer"><strong>Semifinals</strong></li><br>
+
+          <li class="game game-top {% if object.sfa1_score >= 3 %}winner{% endif %}">{% if object.sfa1 is not NULL %}{{ object.sfa1 }}{% else %}-{% endif %} <span>{% if object.sfa1_score is not NULL %}{{ object.sfa1_score }}{% endif %}</span></li>
+          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-bottom {% if object.sfa2_score >= 3 %}winner{% endif %}">{% if object.sfa2 is not NULL %}{{ object.sfa2 }}{% else %}-{% endif %} <span>{% if object.sfa2_score is not NULL %}{{ object.sfa2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+
+          <li class="game game-top {% if object.sfb1_score >= 3 %}winner{% endif %}">{% if object.sfb1 is not NULL %}{{ object.sfb1 }}{% else %}-{% endif %} <span>{% if object.sfb1_score is not NULL %}{{ object.sfb1_score }}{% endif %}</span></li>
+          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-bottom {% if object.sfb2_score >= 3 %}winner{% endif %}">{% if object.sfb2 is not NULL %}{{ object.sfb2 }}{% else %}-{% endif %} <span>{% if object.sfb2_score is not NULL %}{{ object.sfb2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+        </ul>
+        <ul class="round round-4">
+          <li class="spacer"><strong>Finals (3. a 4. místo)</strong></li><br>
+
+          <li class="game game-top {% if object.fb1_score >= 3 %}winner{% endif %}">{% if object.fb1 is not NULL %}{{ object.fb1 }}{% else %}-{% endif %} <span>{% if object.fb1_score is not NULL %}{{ object.fb1_score }}{% endif %}</span></li>
+          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-bottom {% if object.fb2_score >= 3 %}winner{% endif %}">{% if object.fb2 is not NULL %}{{ object.fb2 }}{% else %}-{% endif %} <span>{% if object.fb2_score is not NULL %}{{ object.fb2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+        </ul>
+        <ul class="round round-4">
+          <li class="spacer"><strong>Finals (1. a 2. místo)</strong></li><br>
+
+          <li class="game game-top {% if object.f1_score >= 3 %}winner{% endif %}">{% if object.f1 is not NULL %}{{ object.f1 }}{% else %}-{% endif %} <span>{% if object.f1_score is not NULL %}{{ object.f1_score }}{% endif %}</span></li>
+          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-bottom {% if object.f2_score >= 3 %}winner{% endif %}">{% if object.f2 is not NULL %}{{ object.f2 }}{% else %}-{% endif %} <span>{% if object.f2_score is not NULL %}{{ object.f2_score }}{% endif %}</span></li>
+
+          <li class="spacer">&nbsp;</li>
+        </ul>
+      </main>
+    </div>
+    <div class="card-footer text-muted">
+      <p><strong>Eighth-finals</strong></p>
+      {{ object.info_ef|linebreaks }}
+      <hr>
+      <p><strong>Quarterfinals</strong></p>
+      {{ object.info_qf|linebreaks }}
+      <hr>
+      <p><strong>Semifinals</strong></p>
+      {{ object.info_sf|linebreaks }}
+      <hr>
+      <p><strong>Finals</strong></p>
+      {{ object.info_f|linebreaks }}
+    </div>
+    <div class="card-body border-top text-muted">
+      <p><strong>Pravidla</strong></p>
+      {{ object.info|linebreaks }}
+    </div>
+    <div class="card-footer text-muted">
+      <p><strong>Mapy</strong></p>
+      <p>{{ object.map1 }}</p>
+      <p><img src="/media/{{ object.map1.img }}"></img></p><br>
+      <p>{{ object.map2 }}</p>
+      <p><img src="/media/{{ object.map2.img }}"></img></p><br>
+      <p>{{ object.map3 }}</p>
+      <p><img src="/media/{{ object.map3.img }}"></img></p><br>
+      <p>{{ object.map4 }}</p>
+      <p><img src="/media/{{ object.map4.img }}"></img></p><br>
+      <p>{{ object.map5 }}</p>
+      <p><img src="/media/{{ object.map5.img }}"></img></p><br>
+      <p>{{ object.map6 }}</p>
+      <p><img src="/media/{{ object.map6.img }}"></img></p><br>
+      <p>{{ object.map7 }}</p>
+      <p><img src="/media/{{ object.map7.img }}"></img></p><br>
+      <p>{{ object.map8 }}</p>
+      <p><img src="/media/{{ object.map8.img }}"></img></p><br>
+      <p>{{ object.map9 }}</p>
+      <p><img src="/media/{{ object.map9.img }}"></img></p><br>
+      <p>{{ object.map10 }}</p>
+      <p><img src="/media/{{ object.map10.img }}"></img></p><br>
+    </div>
+  </div>
+
+
+{% endblock %}

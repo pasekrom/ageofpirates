@@ -1,6 +1,6 @@
 from django.db.models.functions import Lower
-from django.views.generic import TemplateView, ListView
-from .models import Player, Match, Map, Civilization
+from django.views.generic import TemplateView, ListView, DetailView
+from .models import Player, Match, Map, Civilization, Tournament
 
 
 class HomeView(TemplateView):
@@ -39,3 +39,17 @@ class StatsView(ListView):
         context['match_list'] = Match.objects.all()
 
         return context
+
+
+class TournamentsView(ListView):
+
+    template_name = 'ageofpirates/tournaments.html'
+
+    def get_queryset(self):
+        return Tournament.objects.all().order_by('-datum_zahajeni')
+
+
+class TournamentsDetailView(DetailView):
+
+    template_name = 'ageofpirates/tournaments_detail.html'
+    model = Tournament
