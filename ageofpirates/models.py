@@ -7,6 +7,10 @@ class Player(models.Model):
     img = models.TextField()
     statistika = models.TextField()
     steam = models.TextField()
+    odehrane_hry = models.BigIntegerField(blank=True, null=True)
+    vyhry = models.BigIntegerField(blank=True, null=True)
+    prohry = models.BigIntegerField(blank=True, null=True)
+    wl = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=5)
 
     class Meta:
         verbose_name = 'Hráč'
