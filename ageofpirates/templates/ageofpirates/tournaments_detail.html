@@ -199,26 +199,38 @@
     </div>
     <div class="card-footer text-muted">
       <p><strong>Mapy</strong></p>
-      <p>{{ object.map1 }}</p>
-      <p><img src="/media/{{ object.map1.img }}"></img></p><br>
-      <p>{{ object.map2 }}</p>
-      <p><img src="/media/{{ object.map2.img }}"></img></p><br>
-      <p>{{ object.map3 }}</p>
-      <p><img src="/media/{{ object.map3.img }}"></img></p><br>
-      <p>{{ object.map4 }}</p>
-      <p><img src="/media/{{ object.map4.img }}"></img></p><br>
-      <p>{{ object.map5 }}</p>
-      <p><img src="/media/{{ object.map5.img }}"></img></p><br>
-      <p>{{ object.map6 }}</p>
-      <p><img src="/media/{{ object.map6.img }}"></img></p><br>
-      <p>{{ object.map7 }}</p>
-      <p><img src="/media/{{ object.map7.img }}"></img></p><br>
-      <p>{{ object.map8 }}</p>
-      <p><img src="/media/{{ object.map8.img }}"></img></p><br>
-      <p>{{ object.map9 }}</p>
-      <p><img src="/media/{{ object.map9.img }}"></img></p><br>
-      <p>{{ object.map10 }}</p>
-      <p><img src="/media/{{ object.map10.img }}"></img></p><br>
+      <div class="row row-cols-md-3">
+        <div class="col-sm">
+          {% if object.map1 is not NULL %}<p>{{ object.map1 }}</p>
+          <p><img src="/media/{{ object.map1.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map2 is not NULL %}<p>{{ object.map2 }}</p>
+          <p><img src="/media/{{ object.map2.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map3 is not NULL %}<p>{{ object.map3 }}</p>
+          <p><img src="/media/{{ object.map3.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map4 is not NULL %}<p>{{ object.map4 }}</p>
+          <p><img src="/media/{{ object.map4.img }}" width="200px"></img></p><br>{% endif %}
+        </div>
+        <div class="col-sm">
+          {% if object.map5 is not NULL %}<p>{{ object.map5 }}</p>
+          <p><img src="/media/{{ object.map5.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map6 is not NULL %}<p>{{ object.map6 }}</p>
+          <p><img src="/media/{{ object.map6.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map7 is not NULL %}<p>{{ object.map7 }}</p>
+          <p><img src="/media/{{ object.map7.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map8 is not NULL %}<p>{{ object.map8 }}</p>
+          <p><img src="/media/{{ object.map8.img }}" width="200px"></img></p><br>{% endif %}
+        </div>
+        <div class="col-sm">
+          {% if object.map9 is not NULL %}<p>{{ object.map9 }}</p>
+          <p><img src="/media/{{ object.map9.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map10 is not NULL %}<p>{{ object.map10 }}</p>
+          <p><img src="/media/{{ object.map10.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map11 is not NULL %}<p>{{ object.map11 }}</p>
+          <p><img src="/media/{{ object.map11.img }}" width="200px"></img></p><br>{% endif %}
+          {% if object.map12 is not NULL %}<p>{{ object.map12 }}</p>
+          <p><img src="/media/{{ object.map12.img }}" width="200px"></img></p><br>{% endif %}
+        </div>
+      </div>
     </div>
   </div>
 

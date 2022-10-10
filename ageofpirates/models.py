@@ -175,6 +175,8 @@ class Tournament(models.Model):
     map8 = models.ForeignKey(Map, blank=True, null=True, on_delete=models.SET_NULL, related_name = 'map8')
     map9 = models.ForeignKey(Map, blank=True, null=True, on_delete=models.SET_NULL, related_name = 'map9')
     map10 = models.ForeignKey(Map, blank=True, null=True, on_delete=models.SET_NULL, related_name = 'map10')
+    map11 = models.ForeignKey(Map, blank=True, null=True, on_delete=models.SET_NULL, related_name = 'map11')
+    map12 = models.ForeignKey(Map, blank=True, null=True, on_delete=models.SET_NULL, related_name = 'map12')
 
     class Meta:
         verbose_name = 'Turnaj'
