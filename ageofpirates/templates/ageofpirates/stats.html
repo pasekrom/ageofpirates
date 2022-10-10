@@ -91,12 +91,12 @@
             <td><img src="/media/{{ civilization.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ civilization.nazev}}"> {{ civilization.nazev }}</td>
             <td>
               <div class="progress">
-                <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: {{ civilization.hry_proc|floatformat:0 }}%;" aria-valuenow="{{ civilization.hry_proc|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">{{ civilization.hry_proc }} %</div>
               </div>
             </td>
             <td>
               <div class="progress">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ civilization.vyhry_proc|floatformat:0 }}%;" aria-valuenow="{{ civilization.vyhry_proc|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">{{ civilization.vyhry_proc }} %</div>
               </div>
             </td>
           </tr>

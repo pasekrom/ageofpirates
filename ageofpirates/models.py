@@ -24,6 +24,10 @@ class Civilization(models.Model):
     id = models.AutoField(primary_key=True)
     nazev = models.TextField()
     emblem = models.ImageField(upload_to='emblems/')
+    hry = models.BigIntegerField(blank=True, null=True)
+    vyhry = models.BigIntegerField(blank=True, null=True)
+    hry_proc = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=5)
+    vyhry_proc = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=5)
 
     class Meta:
         verbose_name = 'Civilizace'

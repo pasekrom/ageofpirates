@@ -40,6 +40,9 @@ class StatsView(ListView):
         context['civilization_list'] = Civilization.objects.all()
         context['match_list'] = Match.objects.all()
         player_list = Player.objects.all()
+        match_list = Match.objects.all()
+        match_count = Match.objects.all().count()
+        civilization_list = Civilization.objects.all()
         for player in player_list:
             odehrane_hry = Match.objects.filter(p1=player.id).count()
             odehrane_hry += Match.objects.filter(p2=player.id).count()
@@ -68,6 +71,36 @@ class StatsView(ListView):
             player.prohry = prohry
             player.wl = wl
             player.save()
+        for civilization in civilization_list:
+            hry = Match.objects.filter(p1_civ=civilization).count()
+            hry += Match.objects.filter(p2_civ=civilization).count()
+            hry += Match.objects.filter(p3_civ=civilization).count()
+            hry += Match.objects.filter(p4_civ=civilization).count()
+            hry += Match.objects.filter(p5_civ=civilization).count()
+            hry += Match.objects.filter(p6_civ=civilization).count()
+            hry += Match.objects.filter(p7_civ=civilization).count()
+            hry += Match.objects.filter(p8_civ=civilization).count()
+            vyhry = Match.objects.filter(p1_team=F('win'), p1_civ=civilization).count()
+            vyhry += Match.objects.filter(p2_team=F('win'), p2_civ=civilization).count()
+            vyhry += Match.objects.filter(p3_team=F('win'), p3_civ=civilization).count()
+            vyhry += Match.objects.filter(p4_team=F('win'), p4_civ=civilization).count()
+            vyhry += Match.objects.filter(p5_team=F('win'), p5_civ=civilization).count()
+            vyhry += Match.objects.filter(p6_team=F('win'), p6_civ=civilization).count()
+            vyhry += Match.objects.filter(p7_team=F('win'), p7_civ=civilization).count()
+            vyhry += Match.objects.filter(p8_team=F('win'), p8_civ=civilization).count()
+            civilization.hry = hry
+            civilization.vyhry = vyhry
+            if hry != 0:
+                hry_proc = round(Decimal(100/(match_count/hry)),2)
+            else:
+                hry_proc = 0
+            civilization.hry_proc = Decimal(hry_proc)
+            if vyhry != 0:
+                vyhry_proc = round(Decimal(100/(match_count/vyhry)),2)
+            else:
+                vyhry_proc = 0
+            civilization.vyhry_proc = Decimal(vyhry_proc)
+            civilization.save()
         return context
 
 
