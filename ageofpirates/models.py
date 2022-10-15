@@ -41,6 +41,9 @@ class Map(models.Model):
     id = models.AutoField(primary_key=True)
     nazev = models.TextField()
     img = models.ImageField(upload_to='maps/')
+    hry = models.BigIntegerField(blank=True, null=True)
+    hry_proc = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=5)
+    prum_doba = models.TimeField(blank=True, null=True)
 
     class Meta:
         verbose_name = 'Mapa'
