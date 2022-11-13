@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-
+<div class="text-white">{% for match in match_list %}{{ match.ef1 }}{% endfor %}</div>
   <div class="card text-center">
     <div class="card-header">
       <h5 class="card-title mt-2">{{ object.nazev }}</h5>
@@ -71,49 +71,49 @@
           <li class="spacer"><strong>Eighth-finals</strong></li><br>
 
           <li class="game game-top {% if object.p1_score >= 2 %}winner{% endif %}">{% if object.p1 is not NULL %}{{ object.p1 }}{% else %}-{% endif %} <span>{% if object.p1_score is not NULL %}{{ object.p1_score }}{% endif %}</span></li>
-          <li class="game game-spacer">{% if object.p2 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}</li>
+          <li class="game game-spacer">{% if object.p2 is not NULL %}<a class="text-dark" href="{% for match in match_list %}{% if match.ef1 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a>{% else %}automatický postup{% endif %}</li>
           <li class="game game-bottom {% if object.p2_score >= 2 %}winner{% endif %}">{% if object.p2 is not NULL %}{{ object.p2 }}{% else %}-{% endif %} <span>{% if object.p2_score is not NULL %}{{ object.p2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.p3_score >= 2 %}winner{% endif %}">{% if object.p3 is not NULL %}{{ object.p3 }}{% else %}-{% endif %} <span>{% if object.p3_score is not NULL %}{{ object.p3_score }}{% endif %}</span></li>
-          <li class="game game-spacer">{% if object.p3 is not NULL and object.p4 is not NULL %}<a class="text-dark" href="#">detail série</a>{% elif object.p3 is NULL and object.p4 is NULL %}-{% else %}automatický postup{% endif %}</li>
+          <li class="game game-spacer">{% if object.p3 is not NULL and object.p4 is not NULL %}<a class="text-dark" href="{% for match in match_list %}{% if match.ef2 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a>{% elif object.p3 is NULL and object.p4 is NULL %}-{% else %}automatický postup{% endif %}</li>
           <li class="game game-bottom {% if object.p4_score >= 2 %}winner{% endif %}">{% if object.p4 is not NULL %}{{ object.p4 }}{% else %}-{% endif %} <span>{% if object.p4_score is not NULL %}{{ object.p4_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.p5_score >= 2 %}winner{% endif %}">{% if object.p5 is not NULL %}{{ object.p5 }}{% else %}-{% endif %} <span>{% if object.p5_score is not NULL %}{{ object.p5_score }}{% endif %}</span></li>
-          <li class="game game-spacer">{% if object.p6 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-spacer">{% if object.p6 is not NULL %}<a class="text-dark" href="{% for match in match_list %}{% if match.ef3 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a>{% else %}automatický postup{% endif %}
           <li class="game game-bottom {% if object.p6_score >= 2 %}winner{% endif %}">{% if object.p6 is not NULL %}{{ object.p6 }}{% else %}-{% endif %} <span>{% if object.p6_score is not NULL %}{{ object.p6_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.p7_score >= 2 %}winner{% endif %}">{% if object.p7 is not NULL %}{{ object.p7 }}{% else %}-{% endif %} <span>{% if object.p7_score is not NULL %}{{ object.p7_score }}{% endif %}</span></li>
-          <li class="game game-spacer">{% if object.p8 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-spacer">{% if object.p8 is not NULL %}<a class="text-dark" href="{% for match in match_list %}{% if match.ef4 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a>{% else %}automatický postup{% endif %}
           <li class="game game-bottom {% if object.p8_score >= 2 %}winner{% endif %}">{% if object.p8 is not NULL %}{{ object.p8 }}{% else %}-{% endif %} <span>{% if object.p8_score is not NULL %}{{ object.p8_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.p9_score >= 2 %}winner{% endif %}">{% if object.p9 is not NULL %}{{ object.p9 }}{% else %}-{% endif %} <span>{% if object.p9_score is not NULL %}{{ object.p9_score }}{% endif %}</span></li>
-          <li class="game game-spacer">{% if object.p10 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-spacer">{% if object.p10 is not NULL %}<a class="text-dark" href="{% for match in match_list %}{% if match.ef5 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a>{% else %}automatický postup{% endif %}
           <li class="game game-bottom {% if object.p10_score >= 2 %}winner{% endif %}">{% if object.p10 is not NULL %}{{ object.p10 }}{% else %}-{% endif %} <span>{% if object.p10_score is not NULL %}{{ object.p10_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.p11_score >= 2 %}winner{% endif %}">{% if object.p11 is not NULL %}{{ object.p11 }}{% else %}-{% endif %} <span>{% if object.p11_score is not NULL %}{{ object.p11_score }}{% endif %}</span></li>
-          <li class="game game-spacer">{% if object.p12 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-spacer">{% if object.p12 is not NULL %}<a class="text-dark" href="{% for match in match_list %}{% if match.ef6 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a>{% else %}automatický postup{% endif %}
           <li class="game game-bottom {% if object.p12_score >= 2 %}winner{% endif %}">{% if object.p12 is not NULL %}{{ object.p12 }}{% else %}-{% endif %} <span>{% if object.p12_score is not NULL %}{{ object.p12_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.p13_score >= 2 %}winner{% endif %}">{% if object.p13 is not NULL %}{{ object.p13 }}{% else %}-{% endif %} <span>{% if object.p13_score is not NULL %}{{ object.p13_score }}{% endif %}</span></li>
-          <li class="game game-spacer">{% if object.p14 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-spacer">{% if object.p14 is not NULL %}<a class="text-dark" href="{% for match in match_list %}{% if match.ef7 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a>{% else %}automatický postup{% endif %}
           <li class="game game-bottom {% if object.p14_score >= 2 %}winner{% endif %}">{% if object.p14 is not NULL %}{{ object.p14 }}{% else %}-{% endif %} <span>{% if object.p14_score is not NULL %}{{ object.p14_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.p15_score >= 2 %}winner{% endif %}">{% if object.p15 is not NULL %}{{ object.p15 }}{% else %}-{% endif %} <span>{% if object.p15_score is not NULL %}{{ object.p15_score }}{% endif %}</span></li>
-          <li class="game game-spacer">{% if object.p16 is not NULL %}<a class="text-dark" href="#">detail série</a>{% else %}automatický postup{% endif %}
+          <li class="game game-spacer">{% if object.p16 is not NULL %}<a class="text-dark" href="{% for match in match_list %}{% if match.ef8 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a>{% else %}automatický postup{% endif %}
           <li class="game game-bottom {% if object.p16_score >= 2 %}winner{% endif %}">{% if object.p16 is not NULL %}{{ object.p16 }}{% else %}-{% endif %} <span>{% if object.p16_score is not NULL %}{{ object.p16_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
@@ -122,25 +122,25 @@
           <li class="spacer"><strong>Quarterfinals</strong></li><br>
 
           <li class="game game-top {% if object.qfa1_score >= 2 %}winner{% endif %}">{% if object.qfa1 is not NULL %}{{ object.qfa1 }}{% else %}-{% endif %} <span>{% if object.qfa1_score is not NULL %}{{ object.qfa1_score }}{% endif %}</span></li>
-          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-spacer"><a class="text-dark" href="{% for match in match_list %}{% if match.qf1 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a></li>
           <li class="game game-bottom {% if object.qfa2_score >= 2 %}winner{% endif %}">{% if object.qfa2 is not NULL %}{{ object.qfa2 }}{% else %}-{% endif %} <span>{% if object.qfa2_score is not NULL %}{{ object.qfa2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.qfb1_score >= 2 %}winner{% endif %}">{% if object.qfb1 is not NULL %}{{ object.qfb1 }}{% else %}-{% endif %} <span>{% if object.qfb1_score is not NULL %}{{ object.qfb1_score }}{% endif %}</span></li>
-          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-spacer"><a class="text-dark" href="{% for match in match_list %}{% if match.qf2 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a></li>
           <li class="game game-bottom {% if object.qfb2_score >= 2 %}winner{% endif %}">{% if object.qfb2 is not NULL %}{{ object.qfb2 }}{% else %}-{% endif %} <span>{% if object.qfb2_score is not NULL %}{{ object.qfb2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.qfc1_score >= 2 %}winner{% endif %}">{% if object.qfc1 is not NULL %}{{ object.qfc1 }}{% else %}-{% endif %} <span>{% if object.qfc1_score is not NULL %}{{ object.qfc1_score }}{% endif %}</span></li>
-          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-spacer"><a class="text-dark" href="{% for match in match_list %}{% if match.qf3 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a></li>
           <li class="game game-bottom {% if object.qfc2_score >= 2 %}winner{% endif %}">{% if object.qfc2 is not NULL %}{{ object.qfc2 }}{% else %}-{% endif %} <span>{% if object.qfc2_score is not NULL %}{{ object.qfc2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.qfd1_score >= 2 %}winner{% endif %}">{% if object.qfd1 is not NULL %}{{ object.qfd1 }}{% else %}-{% endif %} <span>{% if object.qfd1_score is not NULL %}{{ object.qfd1_score }}{% endif %}</span></li>
-          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-spacer"><a class="text-dark" href="{% for match in match_list %}{% if match.qf4 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a></li>
           <li class="game game-bottom {% if object.qfd2_score >= 2 %}winner{% endif %}">{% if object.qfd2 is not NULL %}{{ object.qfd2 }}{% else %}-{% endif %} <span>{% if object.qfd2_score is not NULL %}{{ object.qfd2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
@@ -149,13 +149,13 @@
           <li class="spacer"><strong>Semifinals</strong></li><br>
 
           <li class="game game-top {% if object.sfa1_score >= 3 %}winner{% endif %}">{% if object.sfa1 is not NULL %}{{ object.sfa1 }}{% else %}-{% endif %} <span>{% if object.sfa1_score is not NULL %}{{ object.sfa1_score }}{% endif %}</span></li>
-          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-spacer"><a class="text-dark" href="{% for match in match_list %}{% if match.sf1 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a></li>
           <li class="game game-bottom {% if object.sfa2_score >= 3 %}winner{% endif %}">{% if object.sfa2 is not NULL %}{{ object.sfa2 }}{% else %}-{% endif %} <span>{% if object.sfa2_score is not NULL %}{{ object.sfa2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
 
           <li class="game game-top {% if object.sfb1_score >= 3 %}winner{% endif %}">{% if object.sfb1 is not NULL %}{{ object.sfb1 }}{% else %}-{% endif %} <span>{% if object.sfb1_score is not NULL %}{{ object.sfb1_score }}{% endif %}</span></li>
-          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-spacer"><a class="text-dark" href="{% for match in match_list %}{% if match.sf2 == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a></li>
           <li class="game game-bottom {% if object.sfb2_score >= 3 %}winner{% endif %}">{% if object.sfb2 is not NULL %}{{ object.sfb2 }}{% else %}-{% endif %} <span>{% if object.sfb2_score is not NULL %}{{ object.sfb2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
@@ -164,7 +164,7 @@
           <li class="spacer"><strong>Finals (3. a 4. místo)</strong></li><br>
 
           <li class="game game-top {% if object.fb1_score >= 3 %}winner{% endif %}">{% if object.fb1 is not NULL %}{{ object.fb1 }}{% else %}-{% endif %} <span>{% if object.fb1_score is not NULL %}{{ object.fb1_score }}{% endif %}</span></li>
-          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-spacer"><a class="text-dark" href="{% for match in match_list %}{% if match.fb == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a></li>
           <li class="game game-bottom {% if object.fb2_score >= 3 %}winner{% endif %}">{% if object.fb2 is not NULL %}{{ object.fb2 }}{% else %}-{% endif %} <span>{% if object.fb2_score is not NULL %}{{ object.fb2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>
@@ -173,7 +173,7 @@
           <li class="spacer"><strong>Finals (1. a 2. místo)</strong></li><br>
 
           <li class="game game-top {% if object.f1_score >= 3 %}winner{% endif %}">{% if object.f1 is not NULL %}{{ object.f1 }}{% else %}-{% endif %} <span>{% if object.f1_score is not NULL %}{{ object.f1_score }}{% endif %}</span></li>
-          <li class="game game-spacer"><a class="text-dark" href="#">detail série</a></li>
+          <li class="game game-spacer"><a class="text-dark" href="{% for match in match_list %}{% if match.f == True %}/tournamentsmatch/{{ match.id }}{% endif %}{% endfor %}">detail série</a></li>
           <li class="game game-bottom {% if object.f2_score >= 3 %}winner{% endif %}">{% if object.f2 is not NULL %}{{ object.f2 }}{% else %}-{% endif %} <span>{% if object.f2_score is not NULL %}{{ object.f2_score }}{% endif %}</span></li>
 
           <li class="spacer">&nbsp;</li>

@@ -8,7 +8,8 @@ from .views import (
     MatchesView,
     StatsView,
     TournamentsView,
-    TournamentsDetailView
+    TournamentsDetailView,
+    TournamentsMatchesView,
 )
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
     path('stats/', StatsView.as_view(), name='stats'),
     path('tournaments/', TournamentsView.as_view(), name='tournaments'),
     path('tournaments/<pk>', TournamentsDetailView.as_view()),
+    path('tournamentsmatch/<pk>', TournamentsMatchesView.as_view(), name='tournamentsmathces'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

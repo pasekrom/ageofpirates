@@ -93,6 +93,7 @@ class Match(models.Model):
     def __str__(self):
         return f'{self.id}'
 
+
 class PlayerStat(models.Model):
     hrac = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
     hry = models.BigIntegerField(blank=True, null=True)
@@ -195,3 +196,31 @@ class Tournament(models.Model):
 
     def __str__(self):
         return f'{self.nazev}'
+
+
+class TournamentMatch(models.Model):
+    turnaj = models.ForeignKey(Tournament, blank=True, null=True, on_delete=models.SET_NULL)
+    hra = models.ForeignKey(Match, blank=True, null=True, on_delete=models.SET_NULL)
+    ef1 = models.BooleanField(default=False)
+    ef2 = models.BooleanField(default=False)
+    ef3 = models.BooleanField(default=False)
+    ef4 = models.BooleanField(default=False)
+    ef5 = models.BooleanField(default=False)
+    ef6 = models.BooleanField(default=False)
+    ef7 = models.BooleanField(default=False)
+    ef8 = models.BooleanField(default=False)
+    qf1 = models.BooleanField(default=False)
+    qf2 = models.BooleanField(default=False)
+    qf3 = models.BooleanField(default=False)
+    qf4 = models.BooleanField(default=False)
+    sf1 = models.BooleanField(default=False)
+    sf2 = models.BooleanField(default=False)
+    f = models.BooleanField(default=False)
+    fb = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Turnajová hra'
+        verbose_name_plural = 'Turnajové hry'
+
+    def __str__(self):
+        return f'{self.turnaj} - {self.hra}'

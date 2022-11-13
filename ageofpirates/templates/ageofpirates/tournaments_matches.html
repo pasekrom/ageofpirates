@@ -1,0 +1,166 @@
+{% extends 'ageofpirates/main.html' %}
+{% load static %}
+{% block content %}
+<div class="py-5 bg-dark">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col">
+    {% for object in object_list %}
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h6 class="text-center">Hra číslo {{ object.hra.id }}</h6>
+          <p class="text-muted text-center"><small>{{ object.hra.datum_cas }}</small></p>
+          <hr>
+          <p class="card-text">
+            <div class="row">
+
+              <div class="col-sm">
+                <h6 class="text-center">Tým 1</h6>
+                <ul class="list-group">
+                  {% if object.hra.p1_team == 1 %}<li class="list-group-item {% if object.hra.win == 1 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p1_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p1_civ.nazev}}"> {{ object.hra.p1 }}</li>{% endif %}
+                  {% if object.hra.p2_team == 1 %}<li class="list-group-item {% if object.hra.win == 1 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p2_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p2_civ.nazev}}"> {{ object.hra.p2 }}</li>{% endif %}
+                  {% if object.hra.p3_team == 1 %}<li class="list-group-item {% if object.hra.win == 1 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p3_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p3_civ.nazev}}"> {{ object.hra.p3 }}</li>{% endif %}
+                  {% if object.hra.p4_team == 1 %}<li class="list-group-item {% if object.hra.win == 1 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p4_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p4_civ.nazev}}"> {{ object.hra.p4 }}</li>{% endif %}
+                  {% if object.hra.p5_team == 1 %}<li class="list-group-item {% if object.hra.win == 1 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p5_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p5_civ.nazev}}"> {{ object.hra.p5 }}</li>{% endif %}
+                  {% if object.hra.p6_team == 1 %}<li class="list-group-item {% if object.hra.win == 1 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p6_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p6_civ.nazev}}"> {{ object.hra.p6 }}</li>{% endif %}
+                  {% if object.hra.p7_team == 1 %}<li class="list-group-item {% if object.hra.win == 1 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p7_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p7_civ.nazev}}"> {{ object.hra.p7 }}</li>{% endif %}
+                  {% if object.hra.p8_team == 1 %}<li class="list-group-item {% if object.hra.win == 1 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p8_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p8_civ.nazev}}"> {{ object.hra.p8 }}</li>{% endif %}
+                </ul>
+              </div>
+
+              <div class="col-sm">
+                <h6 class="text-center">Tým 2</h6>
+                <ul class="list-group">
+                  {% if object.hra.p1_team == 2 %}<li class="list-group-item {% if object.hra.win == 2 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p1_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p1_civ.nazev}}"> {{ object.hra.p1 }}</li>{% endif %}
+                  {% if object.hra.p2_team == 2 %}<li class="list-group-item {% if object.hra.win == 2 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p2_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p2_civ.nazev}}"> {{ object.hra.p2 }}</li>{% endif %}
+                  {% if object.hra.p3_team == 2 %}<li class="list-group-item {% if object.hra.win == 2 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p3_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p3_civ.nazev}}"> {{ object.hra.p3 }}</li>{% endif %}
+                  {% if object.hra.p4_team == 2 %}<li class="list-group-item {% if object.hra.win == 2 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p4_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p4_civ.nazev}}"> {{ object.hra.p4 }}</li>{% endif %}
+                  {% if object.hra.p5_team == 2 %}<li class="list-group-item {% if object.hra.win == 2 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p5_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p5_civ.nazev}}"> {{ object.hra.p5 }}</li>{% endif %}
+                  {% if object.hra.p6_team == 2 %}<li class="list-group-item {% if object.hra.win == 2 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p6_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p6_civ.nazev}}"> {{ object.hra.p6 }}</li>{% endif %}
+                  {% if object.hra.p7_team == 2 %}<li class="list-group-item {% if object.hra.win == 2 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p7_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p7_civ.nazev}}"> {{ object.hra.p7 }}</li>{% endif %}
+                  {% if object.hra.p8_team == 2 %}<li class="list-group-item {% if object.hra.win == 2 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p8_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p8_civ.nazev}}"> {{ object.hra.p8 }}</li>{% endif %}
+                </ul>
+              </div>
+              {% if object.hra.pocet_tymu > 2 %}
+              <div class="col-sm">
+                <h6 class="text-center">Tým 3</h6>
+                <ul class="list-group">
+                  {% if object.hra.p1_team == 3 %}<li class="list-group-item {% if object.hra.win == 3 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p1_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p1_civ.nazev}}"> {{ object.hra.p1 }}</li>{% endif %}
+                  {% if object.hra.p2_team == 3 %}<li class="list-group-item {% if object.hra.win == 3 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p2_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p2_civ.nazev}}"> {{ object.hra.p2 }}</li>{% endif %}
+                  {% if object.hra.p3_team == 3 %}<li class="list-group-item {% if object.hra.win == 3 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p3_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p3_civ.nazev}}"> {{ object.hra.p3 }}</li>{% endif %}
+                  {% if object.hra.p4_team == 3 %}<li class="list-group-item {% if object.hra.win == 3 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p4_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p4_civ.nazev}}"> {{ object.hra.p4 }}</li>{% endif %}
+                  {% if object.hra.p5_team == 3 %}<li class="list-group-item {% if object.hra.win == 3 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p5_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p5_civ.nazev}}"> {{ object.hra.p5 }}</li>{% endif %}
+                  {% if object.hra.p6_team == 3 %}<li class="list-group-item {% if object.hra.win == 3 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p6_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p6_civ.nazev}}"> {{ object.hra.p6 }}</li>{% endif %}
+                  {% if object.hra.p7_team == 3 %}<li class="list-group-item {% if object.hra.win == 3 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p7_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p7_civ.nazev}}"> {{ object.hra.p7 }}</li>{% endif %}
+                  {% if object.hra.p8_team == 3 %}<li class="list-group-item {% if object.hra.win == 3 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p8_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p8_civ.nazev}}"> {{ object.hra.p8 }}</li>{% endif %}
+                </ul>
+              </div>
+              {% endif %}
+              {% if object.hra.pocet_tymu > 3 %}
+              <div class="col-sm">
+                <h6 class="text-center">Tým 4</h6>
+                <ul class="list-group">
+                  {% if object.hra.p1_team == 4 %}<li class="list-group-item {% if object.hra.win == 4 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p1_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p1_civ.nazev}}"> {{ object.hra.p1 }}</li>{% endif %}
+                  {% if object.hra.p2_team == 4 %}<li class="list-group-item {% if object.hra.win == 4 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p2_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p2_civ.nazev}}"> {{ object.hra.p2 }}</li>{% endif %}
+                  {% if object.hra.p3_team == 4 %}<li class="list-group-item {% if object.hra.win == 4 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p3_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p3_civ.nazev}}"> {{ object.hra.p3 }}</li>{% endif %}
+                  {% if object.hra.p4_team == 4 %}<li class="list-group-item {% if object.hra.win == 4 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p4_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p4_civ.nazev}}"> {{ object.hra.p4 }}</li>{% endif %}
+                  {% if object.hra.p5_team == 4 %}<li class="list-group-item {% if object.hra.win == 4 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p5_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p5_civ.nazev}}"> {{ object.hra.p5 }}</li>{% endif %}
+                  {% if object.hra.p6_team == 4 %}<li class="list-group-item {% if object.hra.win == 4 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p6_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p6_civ.nazev}}"> {{ object.hra.p6 }}</li>{% endif %}
+                  {% if object.hra.p7_team == 4 %}<li class="list-group-item {% if object.hra.win == 4 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p7_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p7_civ.nazev}}"> {{ object.hra.p7 }}</li>{% endif %}
+                  {% if object.hra.p8_team == 4 %}<li class="list-group-item {% if object.hra.win == 4 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p8_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p8_civ.nazev}}"> {{ object.hra.p8 }}</li>{% endif %}
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              {% endif %}
+              {% if object.hra.pocet_tymu > 4 %}
+              <div class="col-sm">
+                <h6 class="text-center">Tým 5</h6>
+                <ul class="list-group">
+                  {% if object.hra.p1_team == 5 %}<li class="list-group-item {% if object.hra.win == 5 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p1_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p1_civ.nazev}}"> {{ object.hra.p1 }}</li>{% endif %}
+                  {% if object.hra.p2_team == 5 %}<li class="list-group-item {% if object.hra.win == 5 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p2_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p2_civ.nazev}}"> {{ object.hra.p2 }}</li>{% endif %}
+                  {% if object.hra.p3_team == 5 %}<li class="list-group-item {% if object.hra.win == 5 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p3_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p3_civ.nazev}}"> {{ object.hra.p3 }}</li>{% endif %}
+                  {% if object.hra.p4_team == 5 %}<li class="list-group-item {% if object.hra.win == 5 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p4_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p4_civ.nazev}}"> {{ object.hra.p4 }}</li>{% endif %}
+                  {% if object.hra.p5_team == 5 %}<li class="list-group-item {% if object.hra.win == 5 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p5_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p5_civ.nazev}}"> {{ object.hra.p5 }}</li>{% endif %}
+                  {% if object.hra.p6_team == 5 %}<li class="list-group-item {% if object.hra.win == 5 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p6_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p6_civ.nazev}}"> {{ object.hra.p6 }}</li>{% endif %}
+                  {% if object.hra.p7_team == 5 %}<li class="list-group-item {% if object.hra.win == 5 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p7_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p7_civ.nazev}}"> {{ object.hra.p7 }}</li>{% endif %}
+                  {% if object.hra.p8_team == 5 %}<li class="list-group-item {% if object.hra.win == 5 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p8_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p8_civ.nazev}}"> {{ object.hra.p8 }}</li>{% endif %}
+                </ul>
+              </div>
+              {% endif %}
+              {% if object.hra.pocet_tymu > 5 %}
+              <div class="col-sm">
+                <h6 class="text-center">Tým 6</h6>
+                <ul class="list-group">
+                  {% if object.hra.p1_team == 6 %}<li class="list-group-item {% if object.hra.win == 6 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p1_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p1_civ.nazev}}"> {{ object.hra.p1 }}</li>{% endif %}
+                  {% if object.hra.p2_team == 6 %}<li class="list-group-item {% if object.hra.win == 6 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p2_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p2_civ.nazev}}"> {{ object.hra.p2 }}</li>{% endif %}
+                  {% if object.hra.p3_team == 6 %}<li class="list-group-item {% if object.hra.win == 6 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p3_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p3_civ.nazev}}"> {{ object.hra.p3 }}</li>{% endif %}
+                  {% if object.hra.p4_team == 6 %}<li class="list-group-item {% if object.hra.win == 6 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p4_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p4_civ.nazev}}"> {{ object.hra.p4 }}</li>{% endif %}
+                  {% if object.hra.p5_team == 6 %}<li class="list-group-item {% if object.hra.win == 6 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p5_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p5_civ.nazev}}"> {{ object.hra.p5 }}</li>{% endif %}
+                  {% if object.hra.p6_team == 6 %}<li class="list-group-item {% if object.hra.win == 6 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p6_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p6_civ.nazev}}"> {{ object.hra.p6 }}</li>{% endif %}
+                  {% if object.hra.p7_team == 6 %}<li class="list-group-item {% if object.hra.win == 6 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p7_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p7_civ.nazev}}"> {{ object.hra.p7 }}</li>{% endif %}
+                  {% if object.hra.p8_team == 6 %}<li class="list-group-item {% if object.hra.win == 6 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p8_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p8_civ.nazev}}"> {{ object.hra.p8 }}</li>{% endif %}
+                </ul>
+              </div>
+              {% endif %}
+              {% if object.hra.pocet_tymu > 6 %}
+              <div class="col-sm">
+                <h6 class="text-center">Tým 7</h6>
+                <ul class="list-group">
+                  {% if object.hra.p1_team == 7 %}<li class="list-group-item {% if object.hra.win == 7 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p1_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p1_civ.nazev}}"> {{ object.hra.p1 }}</li>{% endif %}
+                  {% if object.hra.p2_team == 7 %}<li class="list-group-item {% if object.hra.win == 7 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p2_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p2_civ.nazev}}"> {{ object.hra.p2 }}</li>{% endif %}
+                  {% if object.hra.p3_team == 7 %}<li class="list-group-item {% if object.hra.win == 7 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p3_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p3_civ.nazev}}"> {{ object.hra.p3 }}</li>{% endif %}
+                  {% if object.hra.p4_team == 7 %}<li class="list-group-item {% if object.hra.win == 7 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p4_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p4_civ.nazev}}"> {{ object.hra.p4 }}</li>{% endif %}
+                  {% if object.hra.p5_team == 7 %}<li class="list-group-item {% if object.hra.win == 7 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p5_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p5_civ.nazev}}"> {{ object.hra.p5 }}</li>{% endif %}
+                  {% if object.hra.p6_team == 7 %}<li class="list-group-item {% if object.hra.win == 7 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p6_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p6_civ.nazev}}"> {{ object.hra.p6 }}</li>{% endif %}
+                  {% if object.hra.p7_team == 7 %}<li class="list-group-item {% if object.hra.win == 7 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p7_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p7_civ.nazev}}"> {{ object.hra.p7 }}</li>{% endif %}
+                  {% if object.hra.p8_team == 7 %}<li class="list-group-item {% if object.hra.win == 7 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p8_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p8_civ.nazev}}"> {{ object.hra.p8 }}</li>{% endif %}
+                </ul>
+              </div>
+              {% endif %}
+              {% if object.hra.pocet_tymu > 7 %}
+              <div class="col-sm">
+                <h6 class="text-center">Tým 8</h6>
+                <ul class="list-group">
+                  {% if object.hra.p1_team == 8 %}<li class="list-group-item {% if object.hra.win == 8 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p1_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p1_civ.nazev}}"> {{ object.hra.p1 }}</li>{% endif %}
+                  {% if object.hra.p2_team == 8 %}<li class="list-group-item {% if object.hra.win == 8 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p2_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p2_civ.nazev}}"> {{ object.hra.p2 }}</li>{% endif %}
+                  {% if object.hra.p3_team == 8 %}<li class="list-group-item {% if object.hra.win == 8 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p3_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p3_civ.nazev}}"> {{ object.hra.p3 }}</li>{% endif %}
+                  {% if object.hra.p4_team == 8 %}<li class="list-group-item {% if object.hra.win == 8 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p4_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p4_civ.nazev}}"> {{ object.hra.p4 }}</li>{% endif %}
+                  {% if object.hra.p5_team == 8 %}<li class="list-group-item {% if object.hra.win == 8 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p5_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p5_civ.nazev}}"> {{ object.hra.p5 }}</li>{% endif %}
+                  {% if object.hra.p6_team == 8 %}<li class="list-group-item {% if object.hra.win == 8 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p6_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p6_civ.nazev}}"> {{ object.hra.p6 }}</li>{% endif %}
+                  {% if object.hra.p7_team == 8 %}<li class="list-group-item {% if object.hra.win == 8 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p7_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p7_civ.nazev}}"> {{ object.hra.p7 }}</li>{% endif %}
+                  {% if object.hra.p8_team == 8 %}<li class="list-group-item {% if object.hra.win == 8 %}bg-success{% else %}bg-danger{% endif %}"><img src="/media/{{ object.hra.p8_civ.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ object.hra.p8_civ.nazev}}"> {{ object.hra.p8 }}</li>{% endif %}
+                </ul>
+              </div>
+              {% endif %}
+            </div>
+            <hr>
+            <h6 class="text-center">Vítěz: Tým {{ object.hra.win }}</h6>
+            <hr>
+          <div class="row">
+              <div class="col-sm">
+                <div class="btn-group">
+                  <a class="btn btn-outline-secondary btn-sm" href="https://www.aoe2insights.com/match/{{ object.hra.id }}/" target="_blank">Detailní statistika</a>
+                  <a class="btn btn-outline-secondary btn-sm" href="https://www.aoe2insights.com/match/{{ object.hra.id }}/analysis/" target="_blank">Analýza</a>
+                  <a class="btn btn-outline-secondary btn-sm" href="https://aoe.ms/replay/?gameId={{ object.hra.id }}&profileId={{ object.hra.p1.id }}" target="_blank">Stáhnout záznam hry</a>
+                </div>
+              </div>
+              <div class="col-sm">
+                <small class="text-muted">Mapa: {{ object.hra.map.nazev }} | Délka hry: {{ object.hra.delka_hry|time:"H:i:s" }}</small>
+              </div>
+          </div>
+        </div>
+      </div><br>
+    {% endfor %}
+    </div></div>
+  </div>
+</div>
+
+<script>
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+</script>
+
+{% endblock %}
