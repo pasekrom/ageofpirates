@@ -2,7 +2,7 @@ from django.db.models.functions import Lower
 from decimal import Decimal
 from django.db.models import F
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import Player, Match, Map, Civilization, Tournament
+from .models import Player, Match, Map, Civilization, Tournament, TournamentMatch
 
 
 class HomeView(TemplateView):
@@ -26,6 +26,19 @@ class MatchesView(ListView):
         return Match.objects.all().order_by('-datum_cas')
 
 
+class TournamentsMatchesView(ListView):
+
+    template_name = 'ageofpirates/tournaments_matches.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tournament'] = Tournament.objects.all()
+        return context
+
+    def get_queryset(self):
+        return TournamentMatch.objects.all()
+
+
 class StatsView(ListView):
 
     template_name = 'ageofpirates/stats.html'
@@ -41,6 +54,7 @@ class StatsView(ListView):
         context['match_list'] = Match.objects.all()
         player_list = Player.objects.all()
         match_list = Match.objects.all()
+        map_list = Map.objects.all()
         match_count = Match.objects.all().count()
         civilization_list = Civilization.objects.all()
         for player in player_list:
@@ -71,6 +85,15 @@ class StatsView(ListView):
             player.prohry = prohry
             player.wl = wl
             player.save()
+        for map in map_list:
+            hry = Match.objects.filter(map=map.id).count()
+            if hry != 0:
+                hry_proc = round(Decimal(100/(match_count/hry)),2)
+            else:
+                hry_proc = 0
+            map.hry_proc = Decimal(hry_proc)
+            map.hry = hry
+            map.save()
         for civilization in civilization_list:
             hry = Match.objects.filter(p1_civ=civilization).count()
             hry += Match.objects.filter(p2_civ=civilization).count()
@@ -116,3 +139,8 @@ class TournamentsDetailView(DetailView):
 
     template_name = 'ageofpirates/tournaments_detail.html'
     model = Tournament
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['match_list'] = TournamentMatch.objects.filter(turnaj=1)
+        return context

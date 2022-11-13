@@ -59,9 +59,13 @@
           {% for map in map_list %}
           <tr>
             <td>{{ map.nazev }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ map.hry }}</td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ map.hry_proc|floatformat:0 }}%;" aria-valuenow="{{ map.hry_proc|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100"></div><div class="text-dark"><strong> {{ map.hry_proc }}%</strong><div>
+              </div>
+            </td>
+            <td>{{ map.prum_doba }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -85,12 +89,12 @@
             <td><img src="/media/{{ civilization.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ civilization.nazev}}"> {{ civilization.nazev }}</td>
             <td>
               <div class="progress">
-                <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: {{ civilization.hry_proc|floatformat:0 }}%;" aria-valuenow="{{ civilization.hry_proc|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">{{ civilization.hry_proc }} %</div>
+                <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: {{ civilization.hry_proc|floatformat:0 }}%;" aria-valuenow="{{ civilization.hry_proc|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100"></div><div class="text-dark"><strong> {{ civilization.hry_proc }}%</strong><div>
               </div>
             </td>
             <td>
               <div class="progress">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ civilization.vyhry_proc|floatformat:0 }}%;" aria-valuenow="{{ civilization.vyhry_proc|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">{{ civilization.vyhry_proc }} %</div>
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ civilization.vyhry_proc|floatformat:0 }}%;" aria-valuenow="{{ civilization.vyhry_proc|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100"></div><div class="text-dark"><strong> {{ civilization.vyhry_proc }}%</strong><div>
               </div>
             </td>
           </tr>
