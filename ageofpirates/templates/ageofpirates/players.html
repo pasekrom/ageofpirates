@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-3 g- mt-3">
 
   {% for object in object_list %}
   {% if not object.jmeno == 'AI' %}
@@ -15,7 +15,8 @@
     </div>
     <div class="mt-0 text-center">
       <h4 class="mb-3">{{ object.jmeno }}</h4>
-      <a class="btn btn-outline-secondary btn-sm mx-1" href="{{ object.statistika }}" target="_blank">Detailní statistiky</a>
+      <a class="btn btn-outline-secondary btn-sm mx-1" href="/player/{{ object.id }}">Detailní profil</a>
+      <a class="btn btn-outline-secondary btn-sm mx-1" href="{{ object.statistika }}" target="_blank">aoe2insights</a>
       {% if not object.steam == 'NULL' %}<a class="btn btn-outline-secondary btn-sm mx-1" href="{{ object.steam }}" target="_blank">Steam profil</a>{% endif %}
       <div class="d-flex justify-content-between align-items-center mt-3 px-4 mb-2">
         <div class="stats">

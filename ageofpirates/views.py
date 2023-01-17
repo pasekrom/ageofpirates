@@ -17,6 +17,17 @@ class PlayersView(ListView):
     def get_queryset(self):
         return Player.objects.all().order_by(Lower('jmeno'))
 
+class PlayerView(DetailView):
+
+    template_name = 'ageofpirates/player.html'
+    model = Player
+
+
+class MapView(DetailView):
+
+    template_name = 'ageofpirates/map.html'
+    model = Map
+
 
 class MatchesView(ListView):
 

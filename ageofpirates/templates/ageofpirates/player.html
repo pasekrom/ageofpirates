@@ -1,0 +1,161 @@
+{% extends 'ageofpirates/main.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{ object.img }}" alt="avatar"
+              class="img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{ object.jmeno }}</h5>
+            <div class="d-flex justify-content-center mb-2">
+              <a class="btn btn-outline-secondary mx-1" href="{{ object.statistika }}" target="_blank">aoe2insights</a>
+              {% if not object.steam == 'NULL' %}<a class="btn btn-outline-secondary mx-1" href="{{ object.steam }}" target="_blank">Steam profil</a>{% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fas fa-trophy fa-lg" style="color: #d4af37;"></i>
+                <p class="mb-0">1. místo - TURNAJ NÁZEV</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fas fa-trophy fa-lg" style="color: #c0c0c0;"></i>
+                <p class="mb-0">2. místo - TURNAJ NÁZEV</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fas fa-trophy fa-lg" style="color: #cd7f32;"></i>
+                <p class="mb-0">3. místo - TURNAJ NÁZEV</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fas fa-award fa-lg" style="color: #396323;"></i>
+                <p class="mb-0">účast - TURNAJ NÁZEV</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-sm-4">
+                <p class="mb-0">Odehraných her</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-2">{{ object.odehrane_hry }}</p>
+              </div>
+              <hr>
+              <div class="col-sm-4">
+                <p class="mb-0">Výher</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-2">{{ object.vyhry }}</p>
+              </div>
+              <hr>
+              <div class="col-sm-4">
+                <p class="mb-0">Proher</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-2">{{ object.prohry }}</p>
+              </div>
+              <hr>
+              <div class="col-sm-4">
+                <p class="mb-0">Výhry / Prohry</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-2">{{ object.wl|floatformat:0 }} %</p>
+              </div>
+              <hr>
+              <div class="col-sm-4">
+                <p class="mb-0">ELO</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-2"> xxx </p>
+              </div>
+              <hr>
+              <div class="col-sm-4">
+                <p class="mb-0">Rank</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-0"> #xxx </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-sm-4">
+                <p class="mb-0">Nejhranější civilizace</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-2">1. civka, 2. civka, 3. civka, 4. civka, 5. civka</p>
+              </div>
+              <hr>
+              <div class="col-sm-4">
+                <p class="mb-0">Nejčastější spojenec</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-2">1. hráč, 2. hráč, 3. hráč, 4. hráč, 5. hráč</p>
+              </div>
+              <hr>
+              <div class="col-sm-4">
+                <p class="mb-0">Nejčastější nepřítel</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-0">1. hráč, 2. hráč, 3. hráč, 4. hráč, 5. hráč</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4">Výhry / Prohry podle map</p>
+
+                <p class="mb-1" style="font-size: .77rem;">Mapa</p>
+                <div class="progress bg-danger" style="position: relative;">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="left" style="position: absolute; left: 0;">&nbsp 3</div>
+                  <div class="right" style="position: absolute; right: 0;">1 &nbsp</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4">Výhry / Prohry podle civilizací</p>
+
+                <p class="mb-1" style="font-size: .77rem;">Civilizace</p>
+                <div class="progress bg-danger" style="position: relative;">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="left" style="position: absolute; left: 0;">&nbsp 9</div>
+                  <div class="right" style="position: absolute; right: 0;">3 &nbsp</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

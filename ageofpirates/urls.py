@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from .views import (
     HomeView,
     PlayersView,
+    PlayerView,
+    MapView,
     MatchesView,
     StatsView,
     TournamentsView,
@@ -16,6 +18,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
     path('players/', PlayersView.as_view(), name='players'),
+    path('player/<pk>', PlayerView.as_view(), name='player'),
+    path('map/<pk>', MapView.as_view(), name='map'),
     path('games/', MatchesView.as_view(), name='matches'),
     path('stats/', StatsView.as_view(), name='stats'),
     path('tournaments/', TournamentsView.as_view(), name='tournaments'),
