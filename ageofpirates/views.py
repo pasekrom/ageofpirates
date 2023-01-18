@@ -37,7 +37,7 @@ class MapView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['match_list'] = Match.objects.filter(map=self.object.id).order_by('-datum_cas')
+        context['match_list'] = Match.objects.filter(map=self.object.id).order_by('-datum_cas')[:10]
         return context
 
 
@@ -46,7 +46,7 @@ class MatchesView(ListView):
     template_name = 'ageofpirates/matches.html'
 
     def get_queryset(self):
-        return Match.objects.all().order_by('-datum_cas')
+        return Match.objects.all().order_by('-datum_cas')[:50]
 
 
 class TournamentsMatchesView(ListView):
@@ -101,8 +101,12 @@ def kalkulace(request):
     player_list = Player.objects.all()
     match_list = Match.objects.all()
     map_list = Map.objects.all()
+    stat_mp = MapPlayerStat.objects.all()
+    stat_mc = MapCivStat.objects.all()
+    stat_cp = CivPlayerStat.objects.all()
     match_count = Match.objects.all().count()
     civilization_list = Civilization.objects.all()
+
     for player in player_list:
         odehrane_hry = Match.objects.filter(p1=player.id).count()
         odehrane_hry += Match.objects.filter(p2=player.id).count()
@@ -131,6 +135,7 @@ def kalkulace(request):
         player.prohry = prohry
         player.wl = wl
         player.save()
+
     for map in map_list:
         hry = Match.objects.filter(map=map.id).count()
         if hry != 0:
@@ -140,6 +145,7 @@ def kalkulace(request):
         map.hry_proc = Decimal(hry_proc)
         map.hry = hry
         map.save()
+
     for civilization in civilization_list:
         hry = Match.objects.filter(p1_civ=civilization).count()
         hry += Match.objects.filter(p2_civ=civilization).count()
@@ -170,4 +176,21 @@ def kalkulace(request):
             vyhry_proc = 0
         civilization.vyhry_proc = Decimal(vyhry_proc)
         civilization.save()
+
+    return HttpResponse("hotovo")
+
+
+def test(request):
+
+    player_list = Player.objects.all()
+    match_list = Match.objects.all()
+    map_list = Map.objects.all()
+    civ_list = Civilization.objects.all()
+    stat_mp = MapPlayerStat.objects.all()
+    stat_mc = MapCivStat.objects.all()
+    stat_cp = CivPlayerStat.objects.all()
+
+    for match in match_list:
+        pass
+
     return HttpResponse("hotovo")

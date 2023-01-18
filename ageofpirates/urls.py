@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
     path('kalkulace/', views.kalkulace, name='kalkulace'),
+    path('test/', views.test, name='test'),
     path('players/', PlayersView.as_view(), name='players'),
     path('player/<pk>', PlayerView.as_view(), name='player'),
     path('map/<pk>', MapView.as_view(), name='map'),

@@ -14,7 +14,7 @@
               class="img-fluid" style="width: 150px;">
             <h5 class="my-3">{{ object.jmeno }}</h5>
             <div class="d-flex justify-content-center mb-2">
-              <a class="btn btn-outline-secondary mx-1" href="{{ object.statistika }}" target="_blank">aoe2insights</a>
+              {% if not 'AI' in player.jmeno %}<a class="btn btn-outline-secondary mx-1" href="{{ object.statistika }}" target="_blank">aoe2insights</a>{% endif %}
               {% if not object.steam == 'NULL' %}<a class="btn btn-outline-secondary mx-1" href="{{ object.steam }}" target="_blank">Steam profil</a>{% endif %}
             </div>
           </div>
