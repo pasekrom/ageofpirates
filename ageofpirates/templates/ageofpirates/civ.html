@@ -3,62 +3,67 @@
 {% block content %}
 
 <section class="mt-5">
+
   <div class="container">
 
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-6">
-                <p class="mb-0">Odehraných her</p>
-              </div>
-              <div class="col-sm-6">
-                <p class="text-muted mb-0">{{ object.hry }}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-6">
-                <p class="mb-0">Průměrná doba hry</p>
-              </div>
-              <div class="col-sm-6">
-                <p class="text-muted mb-0">{{ object.prum_doba }}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-6">
-                <p class="mb-0">Pořadí hratelnosti</p>
-              </div>
-              <div class="col-sm-6">
-                <p class="text-muted mb-0"> xxx </p>
-              </div>
+          <div class="card-body text-center">
+            <img src="/media/{{ object.emblem }}" alt="emblem"
+              class="img-fluid">
+            <h5 class="my-3">{{ object.nazev }}</h5>
+            <div class="d-flex justify-content-center mb-2">
+              <p>{{ object.info }}</p>
             </div>
           </div>
         </div>
-        <div class="card mb-4 mb-lg-0">
-          <div class="card-body p-0">
-            <p class="mt-2 mb-0 text-center">Nedávné hry</p>
-            <ul class="list-group list-group-flush rounded-3">
-              {% for match in match_list %}
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <p class="mb-0">{{ match.datum_cas|date:'Y/m/d' }}</p>
-                <p class="mb-0"><a class="text-dark" href="/match/{{ match.id }}">{{ match.id }}</a></p>
-              </li>
-              {% endfor %}
-            </ul>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-sm-8">
+                <p class="mb-0">Odehraných her s civilizací</p>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-muted mb-2">{{ object.hry }}</p>
+              </div>
+              <hr>
+              <div class="col-sm-8">
+                <p class="mb-0">Ve vítězném týmu</p>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-muted mb-0">{{ object.vyhry }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="col-lg-8">
+
+
         <div class="card mb-4">
-          <div class="card-body text-center">
-            <h5 class="my-3">{{ object.nazev }}</h5>
-            <img src="/media/{{ object.img }}" alt="mapa"
-              class="img-fluid mb-3" style="width: 75%;">
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-sm-4">
+                <p class="mb-0">Nejčastěji vybírá</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-2">1. hráč, 2. hráč, 3. hráč, 4. hráč, 5. hráč</p>
+              </div>
+              <hr>
+              <div class="col-sm-4">
+                <p class="mb-0">Nejhranější mapa</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-0">1. mapa, 2. mapa, 3. mapa, 4. mapa, 5. mapa</p>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-6">
             <div class="card mb-4 mb-md-0">
@@ -78,9 +83,9 @@
           <div class="col-md-6">
             <div class="card mb-4 mb-md-0">
               <div class="card-body">
-                <p class="mb-4">Výhry / Prohry podle civilizací</p>
+                <p class="mb-4">Výhry / Prohry podle mapy</p>
 
-                <p class="mb-1" style="font-size: .77rem;">Civilizace</p>
+                <p class="mb-1" style="font-size: .77rem;">Mapy</p>
                 <div class="progress bg-danger" style="position: relative;">
                   <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                   <div class="left" style="position: absolute; left: 0;">&nbsp 9</div>

@@ -23,9 +23,9 @@
           <tr>
             <th>Hráč</th>
             <th>Odehraných her</th>
-            <th>Vítězství</th>
+            <th>Výhry</th>
             <th>Prohry</th>
-            <th>W/L</th>
+            <th>Výhry/Prohry</th>
             <th>Rank</th>
           </tr>
         </thead>
@@ -33,11 +33,11 @@
           {% for player in player_list %}
           {% if not 'AI' in player.jmeno %}
           <tr>
-            <td><a href="/map/{{ player.id }}" class="text-white">{{ player.jmeno }}</a></td>
+            <td><a href="/player/{{ player.id }}" class="text-white">{{ player.jmeno }}</a></td>
             <td>{{ player.odehrane_hry }}</td>
             <td>{{ player.vyhry }}</td>
             <td>{{ player.prohry }}</td>
-            <td>{{ player.wl|floatformat:2 }} %</td>
+            <td>{% if not player.wl == 10000 %}0.{{ player.wl|floatformat:0 }}{% else %}1.0000{% endif %}</td>
             <td># </td>
           </tr>
           {% endif %}
@@ -86,7 +86,7 @@
         <tbody>
           {% for civilization in civilization_list %}
           <tr>
-            <td><img src="/media/{{ civilization.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ civilization.nazev}}"> {{ civilization.nazev }}</td>
+            <td><img src="/media/{{ civilization.emblem }}" width="20px" data-bs-toggle="tooltip" data-bs-title="{{ civilization.nazev}}"> <a href="/civ/{{ civilization.id }}" class="text-white">{{ civilization.nazev }}</a></td>
             <td>
               <div class="progress">
                 <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: {{ civilization.hry_proc|floatformat:0 }}%;" aria-valuenow="{{ civilization.hry_proc|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100"></div><div class="text-dark"><strong> {{ civilization.hry_proc }}%</strong><div>

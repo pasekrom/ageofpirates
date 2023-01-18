@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<section>
+<section class="mt-5">
 
   <div class="container">
 
@@ -19,6 +19,56 @@
             </div>
           </div>
         </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-sm-8">
+                <p class="mb-0">Odehraných her</p>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-muted mb-2">{{ object.odehrane_hry }}</p>
+              </div>
+              <hr>
+              <div class="col-sm-8">
+                <p class="mb-0">Výher</p>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-muted mb-2">{{ object.vyhry }}</p>
+              </div>
+              <hr>
+              <div class="col-sm-8">
+                <p class="mb-0">Proher</p>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-muted mb-2">{{ object.prohry }}</p>
+              </div>
+              <hr>
+              <div class="col-sm-8">
+                <p class="mb-0">Výhry / Prohry</p>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-muted mb-2">{% if not object.wl == 10000 %}0.{{ object.wl|floatformat:0 }}{% else %}1.0000{% endif %}</p>
+              </div>
+              <hr>
+              <div class="col-sm-8">
+                <p class="mb-0">ELO</p>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-muted mb-2"> xxx </p>
+              </div>
+              <hr>
+              <div class="col-sm-8">
+                <p class="mb-0">Rank</p>
+              </div>
+              <div class="col-sm-4">
+                <p class="text-muted mb-0"> #xxx </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="card mb-4 mb-lg-0">
           <div class="card-body p-0">
             <ul class="list-group list-group-flush rounded-3">
@@ -40,54 +90,7 @@
       </div>
 
       <div class="col-lg-8">
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="row">
 
-              <div class="col-sm-4">
-                <p class="mb-0">Odehraných her</p>
-              </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-2">{{ object.odehrane_hry }}</p>
-              </div>
-              <hr>
-              <div class="col-sm-4">
-                <p class="mb-0">Výher</p>
-              </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-2">{{ object.vyhry }}</p>
-              </div>
-              <hr>
-              <div class="col-sm-4">
-                <p class="mb-0">Proher</p>
-              </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-2">{{ object.prohry }}</p>
-              </div>
-              <hr>
-              <div class="col-sm-4">
-                <p class="mb-0">Výhry / Prohry</p>
-              </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-2">{{ object.wl|floatformat:0 }} %</p>
-              </div>
-              <hr>
-              <div class="col-sm-4">
-                <p class="mb-0">ELO</p>
-              </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-2"> xxx </p>
-              </div>
-              <hr>
-              <div class="col-sm-4">
-                <p class="mb-0">Rank</p>
-              </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-0"> #xxx </p>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div class="card mb-4">
           <div class="card-body">

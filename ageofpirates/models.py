@@ -10,7 +10,7 @@ class Player(models.Model):
     odehrane_hry = models.BigIntegerField(blank=True, null=True)
     vyhry = models.BigIntegerField(blank=True, null=True)
     prohry = models.BigIntegerField(blank=True, null=True)
-    wl = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=5)
+    wl = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=7)
 
     class Meta:
         verbose_name = 'Hráč'
@@ -28,6 +28,7 @@ class Civilization(models.Model):
     vyhry = models.BigIntegerField(blank=True, null=True)
     hry_proc = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=5)
     vyhry_proc = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=5)
+    info = models.TextField(blank=True)
 
     class Meta:
         verbose_name = 'Civilizace'

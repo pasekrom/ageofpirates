@@ -41,6 +41,16 @@ class MapView(DetailView):
         return context
 
 
+class CivView(DetailView):
+
+    template_name = 'ageofpirates/civ.html'
+    model = Civilization
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
 class MatchesView(ListView):
 
     template_name = 'ageofpirates/matches.html'
@@ -127,6 +137,7 @@ def kalkulace(request):
         prohry = odehrane_hry - vyhry
         if vyhry != 0:
             wl = round(Decimal(100/(odehrane_hry/vyhry)),2)
+            wl = wl*100
         else:
             wl = 0
         wl = Decimal(wl)

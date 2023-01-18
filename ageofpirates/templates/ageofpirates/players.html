@@ -22,12 +22,8 @@
           <span>{{ object.odehrane_hry }}</span>
         </div>
         <div class="stats">
-          <h6 class="mb-0">Výhry</h6>
-          <span>{{ object.vyhry }}</span>
-        </div>
-        <div class="stats">
-          <h6 class="mb-0">W/L</h6>
-          <span>{{ object.wl }} %</span>
+          <h6 class="mb-0">Výhry / Prohry</h6>
+          <span>{% if not object.wl == 10000 %}0.{{ object.wl|floatformat:0 }}{% else %}1.0000{% endif %}</span>
         </div>
         <div class="stats">
           <h6 class="mb-0">Rank</h6>
