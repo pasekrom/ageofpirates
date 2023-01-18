@@ -100,6 +100,28 @@ class PlayerStat(models.Model):
     vyhry = models.BigIntegerField(blank=True, null=True)
     prohry = models.BigIntegerField(blank=True, null=True)
     rank = models.BigIntegerField(blank=True, null=True)
+    elo = models.BigIntegerField(blank=True, null=True)
+
+
+class MapPlayerStat(models.Model):
+    map = models.ForeignKey(Map, null=True, on_delete=models.SET_NULL)
+    hrac = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
+    vyhry = models.BigIntegerField(blank=True, null=True)
+    prohry = models.BigIntegerField(blank=True, null=True)
+
+
+class MapCivStat(models.Model):
+    map = models.ForeignKey(Map, null=True, on_delete=models.SET_NULL)
+    civ = models.ForeignKey(Civilization, null=True, on_delete=models.SET_NULL)
+    vyhry = models.BigIntegerField(blank=True, null=True)
+    prohry = models.BigIntegerField(blank=True, null=True)
+
+
+class CivPlayerStat(models.Model):
+    civ = models.ForeignKey(Civilization, null=True, on_delete=models.SET_NULL)
+    hrac = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
+    vyhry = models.BigIntegerField(blank=True, null=True)
+    prohry = models.BigIntegerField(blank=True, null=True)
 
 
 class Tournament(models.Model):
@@ -224,3 +246,17 @@ class TournamentMatch(models.Model):
 
     def __str__(self):
         return f'{self.turnaj} - {self.hra}'
+
+
+class Awards(models.Model):
+    id = models.AutoField(primary_key=True)
+    hrac = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
+    umisteni = models.PositiveSmallIntegerField()
+    text = models.TextField()
+
+    class Meta:
+        verbose_name = 'Ocenění'
+        verbose_name_plural = 'Ocenění'
+
+    def __str__(self):
+        return f'{self.hrac} - {self.umisteni} {self.text}'

@@ -29,15 +29,6 @@
             <hr>
             <div class="row">
               <div class="col-sm-6">
-                <p class="mb-0">Procento her</p>
-              </div>
-              <div class="col-sm-6">
-                <p class="text-muted mb-0">{{ object.hry_proc|floatformat:0 }} %</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-6">
                 <p class="mb-0">Pořadí hratelnosti</p>
               </div>
               <div class="col-sm-6">
@@ -50,11 +41,12 @@
           <div class="card-body p-0">
             <p class="mt-2 mb-0 text-center">Nedávné hry</p>
             <ul class="list-group list-group-flush rounded-3">
+              {% for match in match_list %}
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <p class="mb-0">datum</p>
-                <p class="mb-0">2v2</p>
-                <p class="mb-0">číslo hry</p>
+                <p class="mb-0">{{ match.datum_cas|date:'Y/m/d' }}</p>
+                <p class="mb-0"><a class="text-dark" href="/match/{{ match.id }}">{{ match.id }}</a></p>
               </li>
+              {% endfor %}
             </ul>
           </div>
         </div>

@@ -22,22 +22,18 @@
         <div class="card mb-4 mb-lg-0">
           <div class="card-body p-0">
             <ul class="list-group list-group-flush rounded-3">
+              {% for award in awards_list %}
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fas fa-trophy fa-lg" style="color: #d4af37;"></i>
-                <p class="mb-0">1. místo - TURNAJ NÁZEV</p>
+                {% if award.umisteni == 0 %}<i class="fas fa-award fa-lg" style="color: #396323;"></i>
+                {% elif award.umisteni == 1 %}<i class="fas fa-trophy fa-lg" style="color: #d4af37;"></i>
+                {% elif award.umisteni == 2 %}<i class="fas fa-trophy fa-lg" style="color: #c0c0c0;"></i>
+                {% elif award.umisteni == 3 %}<i class="fas fa-trophy fa-lg" style="color: #cd7f32;"></i>
+                {% elif award.umisteni >= 4 %}<i class="fas fa-award fa-lg" style="color: #396323;"></i>{% endif %}
+                <p class="mb-0">
+                  {% if award.umisteni == 0 %}účast{% else %}{{ award.umisteni }}. místo{% endif %} - {{ award.text }}
+                </p>
               </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fas fa-trophy fa-lg" style="color: #c0c0c0;"></i>
-                <p class="mb-0">2. místo - TURNAJ NÁZEV</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fas fa-trophy fa-lg" style="color: #cd7f32;"></i>
-                <p class="mb-0">3. místo - TURNAJ NÁZEV</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fas fa-award fa-lg" style="color: #396323;"></i>
-                <p class="mb-0">účast - TURNAJ NÁZEV</p>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </div>

@@ -2,21 +2,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import (
-    HomeView,
-    PlayersView,
-    PlayerView,
-    MapView,
-    MatchesView,
-    StatsView,
-    TournamentsView,
-    TournamentsDetailView,
-    TournamentsMatchesView,
-)
+from . import views
+from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
+    path('kalkulace/', views.kalkulace, name='kalkulace'),
     path('players/', PlayersView.as_view(), name='players'),
     path('player/<pk>', PlayerView.as_view(), name='player'),
     path('map/<pk>', MapView.as_view(), name='map'),
