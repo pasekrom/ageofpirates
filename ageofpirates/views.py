@@ -1,8 +1,8 @@
 from django.db.models.functions import Lower
 from django.http import HttpResponse
-
+from django.db import connection
 from decimal import Decimal
-from django.db.models import F
+from django.db.models import F, Q
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import *
 
@@ -27,6 +27,7 @@ class PlayerView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['awards_list'] = Awards.objects.filter(hrac=self.object.id).order_by('-id')
+        context['match_list'] = Match.objects.filter(Q(p1=self.object.id) | Q(p2=self.object.id) | Q(p3=self.object.id) | Q(p4=self.object.id) | Q(p5=self.object.id) | Q(p6=self.object.id) | Q(p7=self.object.id) | Q(p8=self.object.id)).order_by('-datum_cas')[:10]
         return context
 
 
@@ -199,9 +200,125 @@ def test(request):
     civ_list = Civilization.objects.all()
     stat_mp = MapPlayerStat.objects.all()
     stat_mc = MapCivStat.objects.all()
-    stat_cp = CivPlayerStat.objects.all()
+    stat_cp_list = CivPlayerStat.objects.all()
+    sql_cpw = ''' --počet her hráče s civkou a výhra
+    SELECT COUNT(*)
+    FROM ageofpirates_match
+    WHERE
+        ((p1_id = %s) AND (p1_civ_id = %s) AND (p1_team = win)) OR
+        ((p2_id = %s) AND (p2_civ_id = %s) AND (p2_team = win)) OR
+        ((p3_id = %s) AND (p3_civ_id = %s) AND (p3_team = win)) OR
+        ((p4_id = %s) AND (p4_civ_id = %s) AND (p4_team = win)) OR
+        ((p5_id = %s) AND (p5_civ_id = %s) AND (p5_team = win)) OR
+        ((p6_id = %s) AND (p6_civ_id = %s) AND (p6_team = win)) OR
+        ((p7_id = %s) AND (p7_civ_id = %s) AND (p7_team = win)) OR
+        ((p8_id = %s) AND (p8_civ_id = %s) AND (p8_team = win))
+    '''
 
+# TODO !!!!!!
     for match in match_list:
-        pass
+        for player in player_list:
+            for civ in civ_list:
+                with connection.cursor() as cursor:
+                    win = cursor.execute(sql_cpw, [player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id])
+                stat_cp = CivPlayerStat(civ = civ, hrac = player, vyhry = win)
+                stat_cp.save()
+    ''' počet výher
+    SELECT COUNT(*)
+    FROM ageofpirates_match
+    WHERE
+    	((p1_id = xxx) AND (p1_team = win)) OR
+    	((p2_id = xxx) AND (p2_team = win)) OR
+    	((p3_id = xxx) AND (p3_team = win)) OR
+    	((p4_id = xxx) AND (p4_team = win)) OR
+    	((p5_id = xxx) AND (p5_team = win)) OR
+    	((p6_id = xxx) AND (p6_team = win)) OR
+    	((p7_id = xxx) AND (p7_team = win)) OR
+    	((p8_id = xxx) AND (p8_team = win))
+    '''
+
+    ''' počet proher
+    SELECT COUNT(*)
+    FROM ageofpirates_match
+    WHERE
+    	((p1_id = xxx) AND (p1_team != win)) OR
+    	((p2_id = xxx) AND (p2_team != win)) OR
+    	((p3_id = xxx) AND (p3_team != win)) OR
+    	((p4_id = xxx) AND (p4_team != win)) OR
+    	((p5_id = xxx) AND (p5_team != win)) OR
+    	((p6_id = xxx) AND (p6_team != win)) OR
+    	((p7_id = xxx) AND (p7_team != win)) OR
+    	((p8_id = xxx) AND (p8_team != win))
+    '''
+
+    ''' počet her hráče s civkou a prohra
+    SELECT COUNT(*)
+    FROM ageofpirates_match
+    WHERE
+    	((p1_id = 5380164) AND (p1_civ_id = 1) AND (p1_team != win)) OR
+    	((p2_id = 5380164) AND (p2_civ_id = 1) AND (p2_team != win)) OR
+    	((p3_id = 5380164) AND (p3_civ_id = 1) AND (p3_team != win)) OR
+    	((p4_id = 5380164) AND (p4_civ_id = 1) AND (p4_team != win)) OR
+    	((p5_id = 5380164) AND (p5_civ_id = 1) AND (p5_team != win)) OR
+    	((p6_id = 5380164) AND (p6_civ_id = 1) AND (p6_team != win)) OR
+    	((p7_id = 5380164) AND (p7_civ_id = 1) AND (p7_team != win)) OR
+    	((p8_id = 5380164) AND (p8_civ_id = 1) AND (p8_team != win))
+    '''
+
+    ''' počet her hráče na mapě a výhra
+    SELECT COUNT(*)
+    FROM ageofpirates_match
+    WHERE
+    	((p1_id = 5380164) AND (map_id = 3) AND (p1_team = win)) OR
+    	((p2_id = 5380164) AND (map_id = 3) AND (p2_team = win)) OR
+    	((p3_id = 5380164) AND (map_id = 3) AND (p3_team = win)) OR
+    	((p4_id = 5380164) AND (map_id = 3) AND (p4_team = win)) OR
+    	((p5_id = 5380164) AND (map_id = 3) AND (p5_team = win)) OR
+    	((p6_id = 5380164) AND (map_id = 3) AND (p6_team = win)) OR
+    	((p7_id = 5380164) AND (map_id = 3) AND (p7_team = win)) OR
+    	((p8_id = 5380164) AND (map_id = 3) AND (p8_team = win))
+    '''
+
+    ''' počet her hráče na mapě a prohra
+    SELECT COUNT(*)
+    FROM ageofpirates_match
+    WHERE
+    	((p1_id = 5380164) AND (map_id = 3) AND (p1_team != win)) OR
+    	((p2_id = 5380164) AND (map_id = 3) AND (p2_team != win)) OR
+    	((p3_id = 5380164) AND (map_id = 3) AND (p3_team != win)) OR
+    	((p4_id = 5380164) AND (map_id = 3) AND (p4_team != win)) OR
+    	((p5_id = 5380164) AND (map_id = 3) AND (p5_team != win)) OR
+    	((p6_id = 5380164) AND (map_id = 3) AND (p6_team != win)) OR
+    	((p7_id = 5380164) AND (map_id = 3) AND (p7_team != win)) OR
+    	((p8_id = 5380164) AND (map_id = 3) AND (p8_team != win))
+    '''
+
+    ''' počet her civky na mapě a prohra
+    SELECT COUNT(*)
+    FROM ageofpirates_match
+    WHERE
+    	((p1_civ_id != 31) AND (map_id = 3) AND (p1_team != win)) OR
+    	((p2_civ_id != 31) AND (map_id = 3) AND (p2_team != win)) OR
+    	((p3_civ_id != 31) AND (map_id = 3) AND (p3_team != win)) OR
+    	((p4_civ_id != 31) AND (map_id = 3) AND (p4_team != win)) OR
+    	((p5_civ_id != 31) AND (map_id = 3) AND (p5_team != win)) OR
+    	((p6_civ_id != 31) AND (map_id = 3) AND (p6_team != win)) OR
+    	((p7_civ_id != 31) AND (map_id = 3) AND (p7_team != win)) OR
+    	((p8_civ_id != 31) AND (map_id = 3) AND (p8_team != win))
+    '''
+
+    ''' počet her civky na mapě a výhra
+    SELECT COUNT(*)
+    FROM ageofpirates_match
+    WHERE
+    	((p1_civ_id != 31) AND (map_id = 3) AND (p1_team = win)) OR
+    	((p2_civ_id != 31) AND (map_id = 3) AND (p2_team = win)) OR
+    	((p3_civ_id != 31) AND (map_id = 3) AND (p3_team = win)) OR
+    	((p4_civ_id != 31) AND (map_id = 3) AND (p4_team = win)) OR
+    	((p5_civ_id != 31) AND (map_id = 3) AND (p5_team = win)) OR
+    	((p6_civ_id != 31) AND (map_id = 3) AND (p6_team = win)) OR
+    	((p7_civ_id != 31) AND (map_id = 3) AND (p7_team = win)) OR
+    	((p8_civ_id != 31) AND (map_id = 3) AND (p8_team = win))
+    '''
 
     return HttpResponse("hotovo")
