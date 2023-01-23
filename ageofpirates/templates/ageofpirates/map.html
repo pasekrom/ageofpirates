@@ -35,7 +35,7 @@
               {% for match in match_list %}
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <p class="mb-0">{{ match.datum_cas|date:'Y/m/d' }}</p>
-                <p class="mb-0"><a class="text-dark" href="#">{{ match.id }}</a></p>
+                <p class="mb-0"><a class="text-dark" href="/match/{{ match.id }}">{{ match.id }}</a></p>
               </li>
               {% endfor %}
             </ul>

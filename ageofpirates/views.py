@@ -60,6 +60,16 @@ class MatchesView(ListView):
         return Match.objects.all().order_by('-datum_cas')[:50]
 
 
+class MatchView(DetailView):
+
+    template_name = 'ageofpirates/match.html'
+    model = Match
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
 class TournamentsMatchesView(ListView):
 
     template_name = 'ageofpirates/tournaments_matches.html'
@@ -97,14 +107,23 @@ class TournamentsView(ListView):
         return Tournament.objects.all().order_by('-datum_zahajeni')
 
 
-class TournamentsDetailView(DetailView):
+class nvtpvpflaoe2deView(TemplateView):
 
-    template_name = 'ageofpirates/tournaments_detail.html'
+    template_name = 'ageofpirates/tournaments/nvtpvpflaoe2de.html'
     model = Tournament
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['match_list'] = TournamentMatch.objects.filter(turnaj=1)
+        return context
+
+
+class tt3v3View(TemplateView):
+
+    template_name = 'ageofpirates/tournaments/tt3v3.html'
+    model = Tournament
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         return context
 
 

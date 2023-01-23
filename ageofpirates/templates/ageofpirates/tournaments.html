@@ -3,17 +3,21 @@
 {% block content %}
 
 <section class="mt-3">
-  {% for object in object_list %}
-  <div class="card text-center">
+
+  <div class="card text-center mb-5">
     <div class="card-body">
-      <h5 class="card-title">{{ object.nazev }}</h5>
-      <a href="/tournaments/{{ object.id }}" class="btn btn-outline-secondary">Detail turnaje</a>
-    </div>
-    <div class="card-footer text-muted">
-      {{ object.datum_zahajeni }}{% if object.vitez is not NULL %} | Vítěz: {{ object.vitez }}{% endif %}
+      <h5 class="card-title">Nejvíc vyvážený turnaj pro všechny pirátské fanoušky legendárního Age of Empires II: DE</h5>
+      <a href="/tournaments/nvtpvpflaoe2de" class="btn btn-outline-secondary">Detail turnaje</a>
     </div>
   </div>
-  {% endfor %}
+
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Turnaj turnajů 3v3</h5>
+      <a href="/tournaments/tt3v3" class="btn btn-outline-secondary">Detail turnaje</a>
+    </div>
+  </div>
+
 
 </section>
 {% endblock %}

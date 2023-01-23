@@ -255,7 +255,8 @@ class Awards(models.Model):
     id = models.AutoField(primary_key=True)
     hrac = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
     umisteni = models.PositiveSmallIntegerField()
-    text = models.TextField()
+    text = models.TextField(blank=True)
+    url = models.TextField(blank=True)
 
     class Meta:
         verbose_name = 'Ocenění'

@@ -14,9 +14,11 @@ urlpatterns = [
     path('player/<pk>', PlayerView.as_view(), name='player'),
     path('map/<pk>', MapView.as_view(), name='map'),
     path('civ/<pk>', CivView.as_view(), name='civ'),
+    path('match/<pk>', MatchView.as_view(), name='match'),
     path('games/', MatchesView.as_view(), name='matches'),
     path('stats/', StatsView.as_view(), name='stats'),
     path('tournaments/', TournamentsView.as_view(), name='tournaments'),
-    path('tournaments/<pk>', TournamentsDetailView.as_view()),
+    path('tournaments/nvtpvpflaoe2de', nvtpvpflaoe2deView.as_view()),
+    path('tournaments/tt3v3', tt3v3View.as_view()),
     path('tournamentsmatch/<pk>', TournamentsMatchesView.as_view(), name='tournamentsmathces'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

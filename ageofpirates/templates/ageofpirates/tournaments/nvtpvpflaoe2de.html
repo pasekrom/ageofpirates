@@ -1,0 +1,255 @@
+{% extends 'ageofpirates/main.html' %}
+{% load static %}
+{% block content %}
+
+
+  <div class="card text-center mt-3">
+    <div class="card-header">
+      <h5 class="card-title mt-2">Nejvíc vyvážený turnaj pro všechny pirátské fanoušky legendárního Age of Empires II: DE</h5>
+    </div>
+    <div class="card-body">
+
+      <main>
+        <style>
+          .tournament-container {}
+
+          .tournament-headers {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            border-bottom: 1px solid #ccc;
+          }
+          .tournament-headers h3 {
+            width: 25%;
+            text-align: center;
+            font-weight: 200;
+            border-right: 1px dashed #ccc;
+            margin: 0;
+            padding: 1rem;
+          }
+
+          .tournament-brackets {
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            background: #fdfdfd;
+            margin-bottom: 50px;
+          }
+          .bracket {
+            padding-left: 0;
+            display: flex;
+            margin: 0;
+            padding: 30px 0;
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: space-around;
+            list-style-type: none;
+            border-right: 1px dashed #ccc;
+            flex: 1;
+          }
+          .team-item {
+            background-color: #f4f4f4;
+            padding: 0.5rem;
+            display: block;
+            margin: 0.5rem 10px;
+            position: relative;
+            vertical-align: middle;
+            line-height: 2;
+            text-align: center;
+            font-size: small;
+          }
+          .team-item:after {
+            content: '';
+            border-color: #4f7a38;
+            border-width: 2px;
+            position: absolute;
+            display: block;
+            width: 10px;
+            right: -11px;
+          }
+          .team-item:nth-of-type(odd):after {
+            border-right-style: solid;
+            border-top-style: solid;
+            height: 100%;
+            top: 50%;
+          }
+          .team-item:nth-of-type(even):after {
+            border-right-style: solid;
+            border-bottom-style: solid;
+            height: 100%;
+            top: -50%;
+          }
+          .team-item:before {
+            content: '';
+            border-top: 2px solid #4f7a38;
+            position: absolute;
+            height: 2px;
+            width: 10px;
+            left: -10px;
+            top: 50%;
+          }
+          .bracket-2 .team-item:nth-of-type(odd):after {
+            height: 200%;
+            top: 50%;
+          }
+          .bracket-2 .team-item:nth-of-type(even):after {
+            height: 200%;
+            top: -150%;
+          }
+          .bracket-3 .team-item:nth-of-type(odd):after {
+            height: 350%;
+            top: 50%;
+          }
+          .bracket-3 .team-item:nth-of-type(even):after {
+            height: 350%;
+            top: -300%;
+          }
+          .bracket-4 .team-item:nth-of-type(odd):after {
+            height: 700%;
+            top: 50%;
+          }
+          .bracket-4 .team-item:nth-of-type(even):after {
+            height: 700%;
+            top: -650%;
+          }
+          .bracket:first-of-type .team-item:before {
+            display: none;
+          }
+          .bracket-4 .team-item:after {
+            display: none;
+          }
+          .bracket:last-of-type .team-item:before, .bracket:last-of-type .team-item:after {
+            display: none;
+          }
+          .team-item time {
+            display: inline-block;
+            background-color: #dbdbdb;
+            font-size: 0.8rem;
+            padding: 0 0.6rem;
+          }
+
+        </style>
+        <div class="tournament-container">
+          <div class="tournament-headers">
+            <h3>Eighth-Finals</h3>
+            <h3>Quarter-Finals</h3>
+            <h3>Semi-Finals</h3>
+            <h3>Gold</h3>
+            <h3>Bronze</h3>
+          </div>
+
+          <div class="tournament-brackets">
+            <ul class="bracket bracket-1">
+              <li class="team-item"><b>BulldokCZE </b><time>2:0</time> Punkie</li>
+              <li class="team-item"><b>Deda Mrazek </b><time>AP</time> </li>
+              <li class="team-item"><b>ladek23 </b><time>2:0</time> Bělohoubek</li>
+              <li class="team-item"><b>ArA_666 </b><time>AP</time> </li>
+              <li class="team-item"><b>Wegasor </b><time>2:0</time> jitka</li>
+              <li class="team-item"><b>ringo </b><time>AP</time> </li>
+              <li class="team-item"><b>Ondrej </b><time>2:1</time> Cipeace</li>
+              <li class="team-item"><b>Greya26 </b><time>AP</time> </li>
+            </ul>
+            <ul class="bracket bracket-2">
+              <li class="team-item">BulldokCZE <time>0:2</time> <b>Deda Mrazek</b></li>
+              <li class="team-item">ladek23 <time>0:2</time> <b>ArA_666</b></li>
+              <li class="team-item">Wegasor <time>0:2</time> <b>ringo</b></li>
+              <li class="team-item">Ondrej <time>1:2</time> <b>Greya26</b></li>
+            </ul>
+            <ul class="bracket bracket-3">
+              <li class="team-item"><b>Deda Mrazek </b><time>3:0</time> ArA_666</li>
+              <li class="team-item"><b>ringo </b><time>3:0</time> Greya26</li>
+            </ul>
+            <ul class="bracket bracket-4">
+
+              <li class="team-item"><b>Deda Mrazek </b><time>3:0</time> ringo</li>
+            </ul>
+
+            <ul class="bracket bracket-5">
+              <li class="team-item"><b>ArA_666 </b><time>3:0</time> Greya26</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="card-footer text-muted">
+      <p><strong>Eighth-Finals</strong></p>
+      <p class="mb-0">Best of 3</p>
+      <p class="mb-0">První mapa: Arabia</p>
+      <p class="mb-0">Druhá mapa: výběr hráče, který prohrál Arabii</p>
+      <p>Třetí mapa: výběr hráče, který prohrál druhou hru</p>
+      <hr>
+      <p><strong>Quarter-Finals</strong></p>
+      <p class="mb-0">Best of 3</p>
+      <p class="mb-0">První mapa: Arabia</p>
+      <p class="mb-0">Druhá mapa: výběr hráče, který prohrál Arabii</p>
+      <p>Třetí mapa: výběr hráče, který prohrál druhou hru</p>
+      <hr>
+      <p><strong>Semi-Finals</strong></p>
+      <p class="mb-0">Best of 5</p>
+      <p class="mb-0">První mapa: Arabia</p>
+      <p class="mb-0">Druhá mapa: výběr hráče, který prohrál Arabii</p>
+      <p class="mb-0">Třetí mapa: výběr hráče, který prohrál druhou hru</p>
+      <p class="mb-0">Čtvrtá mapa: výběr hráče, který prohrál třetí hru</p>
+      <p>Pátá mapa: výběr hráče, který prohrál čtvrtou hru</p>
+      <hr>
+      <p><strong>Finals</strong></p>
+      <p class="mb-0">Best of 5</p>
+      <p class="mb-0">První mapa: Arabia</p>
+      <p class="mb-0">Druhá mapa: výběr hráče, který prohrál Arabii</p>
+      <p class="mb-0">Třetí mapa: výběr hráče, který prohrál druhou hru</p>
+      <p class="mb-0">Čtvrtá mapa: výběr hráče, který prohrál třetí hru</p>
+      <p>Pátá mapa: výběr hráče, který prohrál čtvrtou hru</p>
+    </div>
+    <div class="card-body border-top text-muted">
+      <p class="mb-0"><strong>Pravidla</strong></p>
+      <p class="mb-0">civilizace se nesmí opakovat</p>
+      <p class="mb-0">žádné cheaty</p>
+      <p class="mb-0">hra musí být streamovatelná</p>
+      <p class="mb-0">ve jménu lobby musí být jména obou hráčů</p>
+      <p class="mb-0">zakryté civilizace</p>
+      <p class="mb-0">mód hry je Random map, výjimkou je mapa Fortress, která se hraje jako Regicide (s králem)</p>
+      <p class="mb-0">není nutné hrát všechny hry, hraje se best of 3/5 - první hráč, který bude mít dvě nebo tři vítězství (záleží v jakém kole turnaje jste), postupuje</p>
+      <p class="mb-0">lobby se zakládá na domluvě mezi hráči</p>
+      <p class="mb-0">hraje se i za civilizace z DLC</p>
+      <p class="mb-0">hráči si dají vědět, které mapy si vybrali min 48h před hrou, včetně ban</p>
+      <p class="mb-0">hry se hrají v jednom dni, mezi hrami je max pauza pět minut, každý hráč má právo na jednu 15min pauzu, v případě nouze (a za povolení druhého hráče) se může klání odročit, pokud s tím oponent nebude souhlasit, klání je ukončeno a postupuje do dalšího kola</p>
+      <p class="mb-0">hráči se sami domluví, kdy hrají- den dávají vědět do chatu pět dní dopředu, konkrétní hodinu 24 hodin dopředu</p>
+      <p class="mb-0">semifinals, boj o třetí místo a finals se hrají v jeden víkend- semi sobota, třetí místo a finals neděle</p>
+      <p>schovávat se s pár posledními jednotkami v rozích map je zakázáno, je v pořádku hrát i v moment, kdy to vypadá na výhru oponenta, ale hráč nesmí záměrně oddalovat další hru</p>
+    </div>
+    <div class="card-footer text-muted">
+      <p><strong>Mapy</strong></p>
+      <div class="row row-cols-md-3">
+        <div class="col-sm">
+          <p><a class="text-dark" href="/map/12">Arabia</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Arabia_a5X8ndi.png" width="200px"></img></p><br>
+          <p><a class="text-dark" href="/map/13">Arena</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Arena.png" width="200px"></img></p><br>
+          <p><a class="text-dark" href="/map/14">Nomad</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Nomad_E9aB6hC.png" width="200px"></img></p><br>
+          <p><a class="text-dark" href="/map/12">African Clearing</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/African_Clearing.png" width="200px"></img></p><br>
+        </div>
+        <div class="col-sm">
+          <p><a class="text-dark" href="/map/16">Golden Pit</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Golden_Pit.png" width="200px"></img></p><br>
+          <p><a class="text-dark" href="/map/17">Team Islands</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Team_Islands.png" width="200px"></img></p><br>
+          <p><a class="text-dark" href="/map/18">Mediterranean</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Mediterranean.png" width="200px"></img></p><br>
+        </div>
+        <div class="col-sm">
+          <p><a class="text-dark" href="/map/19">Fortress</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Fortress.png" width="200px"></img></p><br>
+          <p><a class="text-dark" href="/map/20">Serengeti</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Serengeti.png" width="200px"></img></p><br>
+          <p><a class="text-dark" href="/map/21">Four Lakes</a></p>
+          <p><img src="http://aop.pasekrom.eu/media/maps/Four_Lakes.png" width="200px"></img></p><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

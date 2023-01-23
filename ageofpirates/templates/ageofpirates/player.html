@@ -80,7 +80,7 @@
                 {% elif award.umisteni == 3 %}<i class="fas fa-trophy fa-lg" style="color: #cd7f32;"></i>
                 {% elif award.umisteni >= 4 %}<i class="fas fa-award fa-lg" style="color: #396323;"></i>{% endif %}
                 <p class="mb-0">
-                  {% if award.umisteni == 0 %}účast{% else %}{{ award.umisteni }}. místo{% endif %} - {{ award.text }}
+                  {% if award.umisteni == 0 %}účast{% else %}{{ award.umisteni }}. místo{% endif %} - <a class="text-dark" href="/tournaments/{{ award.url }}">{{ award.text }}</a>
                 </p>
               </li>
               {% endfor %}
@@ -95,7 +95,7 @@
               {% for match in match_list %}
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <p class="mb-0">{{ match.datum_cas|date:'Y/m/d' }}</p>
-                <p class="mb-0"><a class="text-dark" href="#">{{ match.id }}</a></p>
+                <p class="mb-0"><a class="text-dark" href="/match/{{ match.id }}">{{ match.id }}</a></p>
               </li>
               {% endfor %}
             </ul>
