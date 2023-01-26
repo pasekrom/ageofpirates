@@ -1,8 +1,5 @@
 # venv #
-Include
-Lib
-Scripts
-pyvenv.cfg
+venv
 
 # Django #
 *.pot
@@ -10,3 +7,6 @@ pyvenv.cfg
 __pycache__
 ageofpirates/settings_local.py
 media
+
+# Pycharm #
+.idea
