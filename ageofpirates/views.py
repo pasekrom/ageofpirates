@@ -213,131 +213,39 @@ def kalkulace(request):
 
 def test(request):
 
-    player_list = Player.objects.all()
-    match_list = Match.objects.all()
-    map_list = Map.objects.all()
-    civ_list = Civilization.objects.all()
-    stat_mp = MapPlayerStat.objects.all()
-    stat_mc = MapCivStat.objects.all()
-    stat_cp_list = CivPlayerStat.objects.all()
-    sql_cpw = ''' --počet her hráče s civkou a výhra
-    SELECT COUNT(*)
-    FROM ageofpirates_match
-    WHERE
-        ((p1_id = %s) AND (p1_civ_id = %s) AND (p1_team = win)) OR
-        ((p2_id = %s) AND (p2_civ_id = %s) AND (p2_team = win)) OR
-        ((p3_id = %s) AND (p3_civ_id = %s) AND (p3_team = win)) OR
-        ((p4_id = %s) AND (p4_civ_id = %s) AND (p4_team = win)) OR
-        ((p5_id = %s) AND (p5_civ_id = %s) AND (p5_team = win)) OR
-        ((p6_id = %s) AND (p6_civ_id = %s) AND (p6_team = win)) OR
-        ((p7_id = %s) AND (p7_civ_id = %s) AND (p7_team = win)) OR
-        ((p8_id = %s) AND (p8_civ_id = %s) AND (p8_team = win))
-    '''
-
-# TODO !!!!!!
-    for match in match_list:
-        for player in player_list:
-            for civ in civ_list:
-                with connection.cursor() as cursor:
-                    win = cursor.execute(sql_cpw, [player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id, player.id, civ.id])
-                stat_cp = CivPlayerStat(civ = civ, hrac = player, vyhry = win)
-                stat_cp.save()
-    ''' počet výher
-    SELECT COUNT(*)
-    FROM ageofpirates_match
-    WHERE
-    	((p1_id = xxx) AND (p1_team = win)) OR
-    	((p2_id = xxx) AND (p2_team = win)) OR
-    	((p3_id = xxx) AND (p3_team = win)) OR
-    	((p4_id = xxx) AND (p4_team = win)) OR
-    	((p5_id = xxx) AND (p5_team = win)) OR
-    	((p6_id = xxx) AND (p6_team = win)) OR
-    	((p7_id = xxx) AND (p7_team = win)) OR
-    	((p8_id = xxx) AND (p8_team = win))
-    '''
-
-    ''' počet proher
-    SELECT COUNT(*)
-    FROM ageofpirates_match
-    WHERE
-    	((p1_id = xxx) AND (p1_team != win)) OR
-    	((p2_id = xxx) AND (p2_team != win)) OR
-    	((p3_id = xxx) AND (p3_team != win)) OR
-    	((p4_id = xxx) AND (p4_team != win)) OR
-    	((p5_id = xxx) AND (p5_team != win)) OR
-    	((p6_id = xxx) AND (p6_team != win)) OR
-    	((p7_id = xxx) AND (p7_team != win)) OR
-    	((p8_id = xxx) AND (p8_team != win))
-    '''
-
-    ''' počet her hráče s civkou a prohra
-    SELECT COUNT(*)
-    FROM ageofpirates_match
-    WHERE
-    	((p1_id = 5380164) AND (p1_civ_id = 1) AND (p1_team != win)) OR
-    	((p2_id = 5380164) AND (p2_civ_id = 1) AND (p2_team != win)) OR
-    	((p3_id = 5380164) AND (p3_civ_id = 1) AND (p3_team != win)) OR
-    	((p4_id = 5380164) AND (p4_civ_id = 1) AND (p4_team != win)) OR
-    	((p5_id = 5380164) AND (p5_civ_id = 1) AND (p5_team != win)) OR
-    	((p6_id = 5380164) AND (p6_civ_id = 1) AND (p6_team != win)) OR
-    	((p7_id = 5380164) AND (p7_civ_id = 1) AND (p7_team != win)) OR
-    	((p8_id = 5380164) AND (p8_civ_id = 1) AND (p8_team != win))
-    '''
-
-    ''' počet her hráče na mapě a výhra
-    SELECT COUNT(*)
-    FROM ageofpirates_match
-    WHERE
-    	((p1_id = 5380164) AND (map_id = 3) AND (p1_team = win)) OR
-    	((p2_id = 5380164) AND (map_id = 3) AND (p2_team = win)) OR
-    	((p3_id = 5380164) AND (map_id = 3) AND (p3_team = win)) OR
-    	((p4_id = 5380164) AND (map_id = 3) AND (p4_team = win)) OR
-    	((p5_id = 5380164) AND (map_id = 3) AND (p5_team = win)) OR
-    	((p6_id = 5380164) AND (map_id = 3) AND (p6_team = win)) OR
-    	((p7_id = 5380164) AND (map_id = 3) AND (p7_team = win)) OR
-    	((p8_id = 5380164) AND (map_id = 3) AND (p8_team = win))
-    '''
-
-    ''' počet her hráče na mapě a prohra
-    SELECT COUNT(*)
-    FROM ageofpirates_match
-    WHERE
-    	((p1_id = 5380164) AND (map_id = 3) AND (p1_team != win)) OR
-    	((p2_id = 5380164) AND (map_id = 3) AND (p2_team != win)) OR
-    	((p3_id = 5380164) AND (map_id = 3) AND (p3_team != win)) OR
-    	((p4_id = 5380164) AND (map_id = 3) AND (p4_team != win)) OR
-    	((p5_id = 5380164) AND (map_id = 3) AND (p5_team != win)) OR
-    	((p6_id = 5380164) AND (map_id = 3) AND (p6_team != win)) OR
-    	((p7_id = 5380164) AND (map_id = 3) AND (p7_team != win)) OR
-    	((p8_id = 5380164) AND (map_id = 3) AND (p8_team != win))
-    '''
-
-    ''' počet her civky na mapě a prohra
-    SELECT COUNT(*)
-    FROM ageofpirates_match
-    WHERE
-    	((p1_civ_id != 31) AND (map_id = 3) AND (p1_team != win)) OR
-    	((p2_civ_id != 31) AND (map_id = 3) AND (p2_team != win)) OR
-    	((p3_civ_id != 31) AND (map_id = 3) AND (p3_team != win)) OR
-    	((p4_civ_id != 31) AND (map_id = 3) AND (p4_team != win)) OR
-    	((p5_civ_id != 31) AND (map_id = 3) AND (p5_team != win)) OR
-    	((p6_civ_id != 31) AND (map_id = 3) AND (p6_team != win)) OR
-    	((p7_civ_id != 31) AND (map_id = 3) AND (p7_team != win)) OR
-    	((p8_civ_id != 31) AND (map_id = 3) AND (p8_team != win))
-    '''
-
-    ''' počet her civky na mapě a výhra
-    SELECT COUNT(*)
-    FROM ageofpirates_match
-    WHERE
-    	((p1_civ_id != 31) AND (map_id = 3) AND (p1_team = win)) OR
-    	((p2_civ_id != 31) AND (map_id = 3) AND (p2_team = win)) OR
-    	((p3_civ_id != 31) AND (map_id = 3) AND (p3_team = win)) OR
-    	((p4_civ_id != 31) AND (map_id = 3) AND (p4_team = win)) OR
-    	((p5_civ_id != 31) AND (map_id = 3) AND (p5_team = win)) OR
-    	((p6_civ_id != 31) AND (map_id = 3) AND (p6_team = win)) OR
-    	((p7_civ_id != 31) AND (map_id = 3) AND (p7_team = win)) OR
-    	((p8_civ_id != 31) AND (map_id = 3) AND (p8_team = win))
+    sql_test = '''
+    SELECT p.jmeno AS player_jmeno,
+        m.nazev AS civ_name,
+        COUNT(*) AS games_played
+    FROM ageofpirates_match AS ma
+    JOIN ageofpirates_player AS p ON p.id = ma.p1_id OR p.id = ma.p2_id
+    JOIN ageofpirates_map AS m ON m.id = ma.map_id
+    WHERE p.id IN (SELECT p.id FROM ageofpirates_match)
+    GROUP BY p.id, m.id
+    ORDER BY p.id, games_played DESC;
     '''
 
     return HttpResponse("hotovo")
+
+
+class TestView(TemplateView):
+
+    template_name = 'ageofpirates/test.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        with connection.cursor() as cursor:
+            sql_test = '''
+                SELECT p.jmeno AS player_jmeno,
+                    m.nazev AS civ_name,
+                    COUNT(*) AS games_played
+                FROM ageofpirates_match AS ma
+                JOIN ageofpirates_player AS p ON p.id = ma.p1_id OR p.id = ma.p2_id
+                JOIN ageofpirates_map AS m ON m.id = ma.map_id
+                WHERE p.id IN (SELECT p.id FROM ageofpirates_match)
+                GROUP BY p.id, m.id
+                ORDER BY p.id, games_played DESC;
+                '''
+            cursor.execute(sql_test)
+            context['test'] = cursor.fetchall()
+        return context
