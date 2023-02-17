@@ -28,6 +28,62 @@ class PlayerView(DetailView):
         context = super().get_context_data(**kwargs)
         context['awards_list'] = Awards.objects.filter(hrac=self.object.id).order_by('-id')
         context['match_list'] = Match.objects.filter(Q(p1=self.object.id) | Q(p2=self.object.id) | Q(p3=self.object.id) | Q(p4=self.object.id) | Q(p5=self.object.id) | Q(p6=self.object.id) | Q(p7=self.object.id) | Q(p8=self.object.id)).order_by('-datum_cas')[:10]
+        with connection.cursor() as cursor:
+            sql_player_map = '''
+                SELECT 
+                    p.jmeno AS player_jmeno, 
+                    m.nazev AS map_nazev, 
+                    COUNT(CASE WHEN ma.win = p_team THEN 1 ELSE NULL END) AS games_won, 
+                    COUNT(CASE WHEN ma.win != p_team THEN 1 ELSE NULL END) AS games_lost,
+                    COUNT(*) AS games_played
+                FROM 
+                    ageofpirates_player AS p
+                    JOIN (
+                        SELECT 
+                            unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
+                            unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
+                            win, 
+                            map_id 
+                        FROM 
+                            ageofpirates_match
+                    ) AS ma ON p.id = ma.player_id 
+                    JOIN ageofpirates_map AS m ON m.id = ma.map_id
+                WHERE 
+                    p.id = %s
+                GROUP BY 
+                    p.id, m.id
+                ORDER BY 
+                    p.id, games_won DESC;
+                '''
+            cursor.execute(sql_player_map, [self.object.id])
+            context['player_map'] = cursor.fetchall()
+            sql_player_civ = '''
+                            SELECT
+                                c.nazev AS civ_nazev, 
+                                COUNT(CASE WHEN ma.win = p_team THEN 1 ELSE NULL END) AS games_won, 
+                                COUNT(CASE WHEN ma.win != p_team THEN 1 ELSE NULL END) AS games_lost,
+                                COUNT(*) AS total_games
+                            FROM 
+                                ageofpirates_player AS p
+                                JOIN (
+                                    SELECT 
+                                        unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
+                                        unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
+                                        unnest(array[p1_civ_id, p2_civ_id, p3_civ_id, p4_civ_id, p5_civ_id, p6_civ_id, p7_civ_id, p8_civ_id]) AS p_civ_id,
+                                        win
+                                    FROM 
+                                        ageofpirates_match
+                                ) AS ma ON p.id = ma.player_id 
+                                JOIN ageofpirates_civilization AS c ON c.id = ma.p_civ_id
+                            WHERE 
+                                p.id = %s
+                            GROUP BY 
+                                p.id, c.id
+                            ORDER BY 
+                                p.id, games_won DESC;
+                            '''
+            cursor.execute(sql_player_civ, [self.object.id])
+            context['player_map'] = cursor.fetchall()
         return context
 
 
@@ -237,15 +293,28 @@ class TestView(TemplateView):
         with connection.cursor() as cursor:
             sql_test = '''
                 SELECT p.jmeno AS player_jmeno,
-                    m.nazev AS civ_name,
-                    COUNT(*) AS games_played
+                       m.nazev AS map_nazev,
+                       COUNT(*) AS games_played
                 FROM ageofpirates_match AS ma
-                JOIN ageofpirates_player AS p ON p.id = ma.p1_id OR p.id = ma.p2_id
+                JOIN ageofpirates_player AS p ON p.id = ma.p1_id OR p.id = ma.p2_id OR p.id = ma.p3_id OR p.id = ma.p4_id OR p.id = ma.p5_id OR p.id = ma.p6_id OR p.id = ma.p7_id OR p.id = ma.p8_id
+                JOIN ageofpirates_map AS m ON m.id = ma.map_id
+                WHERE p.id = %s
+                GROUP BY p.id, m.id
+                ORDER BY p.id, games_played DESC;
+                '''
+            cursor.execute(sql_test, [self.request.user.id])
+            context['player_map'] = cursor.fetchall()
+            sql_test = '''
+                SELECT p.jmeno AS player_jmeno,
+                       m.nazev AS map_nazev,
+                       COUNT(*) AS games_played
+                FROM ageofpirates_match AS ma
+                JOIN ageofpirates_player AS p ON p.id = ma.p1_id OR p.id = ma.p2_id OR p.id = ma.p3_id OR p.id = ma.p4_id OR p.id = ma.p5_id OR p.id = ma.p6_id OR p.id = ma.p7_id OR p.id = ma.p8_id
                 JOIN ageofpirates_map AS m ON m.id = ma.map_id
                 WHERE p.id IN (SELECT p.id FROM ageofpirates_match)
                 GROUP BY p.id, m.id
                 ORDER BY p.id, games_played DESC;
                 '''
             cursor.execute(sql_test)
-            context['test'] = cursor.fetchall()
+            context['testb'] = cursor.fetchall()
         return context
