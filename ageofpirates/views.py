@@ -31,7 +31,6 @@ class PlayerView(DetailView):
         with connection.cursor() as cursor:
             sql_player_map = '''
                 SELECT 
-                    p.jmeno AS player_jmeno, 
                     m.nazev AS map_nazev, 
                     COUNT(CASE WHEN ma.win = p_team THEN 1 ELSE NULL END) AS games_won, 
                     COUNT(CASE WHEN ma.win != p_team THEN 1 ELSE NULL END) AS games_lost,
