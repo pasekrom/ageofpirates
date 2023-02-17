@@ -83,7 +83,7 @@ class PlayerView(DetailView):
                                 p.id, games_won DESC;
                             '''
             cursor.execute(sql_player_civ, [self.object.id])
-            context['player_map'] = cursor.fetchall()
+            context['player_civ'] = cursor.fetchall()
         return context
 
 
