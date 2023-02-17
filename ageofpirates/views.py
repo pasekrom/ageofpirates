@@ -29,6 +29,100 @@ class PlayerView(DetailView):
         context['awards_list'] = Awards.objects.filter(hrac=self.object.id).order_by('-id')
         context['match_list'] = Match.objects.filter(Q(p1=self.object.id) | Q(p2=self.object.id) | Q(p3=self.object.id) | Q(p4=self.object.id) | Q(p5=self.object.id) | Q(p6=self.object.id) | Q(p7=self.object.id) | Q(p8=self.object.id)).order_by('-datum_cas')[:10]
         with connection.cursor() as cursor:
+            sql_player_civs = '''
+                SELECT 
+                    c.id AS civilization_id, 
+                    c.nazev AS civilization, 
+                    COUNT(*) AS games_played 
+                FROM 
+                    ageofpirates_player AS p 
+                    JOIN ageofpirates_match AS m ON p.id IN (m.p1_id, m.p2_id, m.p3_id, m.p4_id, m.p5_id, m.p6_id, m.p7_id, m.p8_id) 
+                    JOIN ageofpirates_civilization AS c ON c.id = CASE p.id
+                        WHEN m.p1_id THEN m.p1_civ_id
+                        WHEN m.p2_id THEN m.p2_civ_id
+                        WHEN m.p3_id THEN m.p3_civ_id
+                        WHEN m.p4_id THEN m.p4_civ_id
+                        WHEN m.p5_id THEN m.p5_civ_id
+                        WHEN m.p6_id THEN m.p6_civ_id
+                        WHEN m.p7_id THEN m.p7_civ_id
+                        WHEN m.p8_id THEN m.p8_civ_id
+                    END
+                WHERE 
+                    p.id = %s
+                GROUP BY 
+                    c.id 
+                ORDER BY 
+                    games_played DESC 
+                LIMIT 5;
+                '''
+            cursor.execute(sql_player_civs, [self.object.id])
+            context['player_civs'] = cursor.fetchall()
+            sql_player_teammates = '''
+                SELECT 
+                    p2.id AS teammate_id, p2.jmeno AS teammate_jmeno, 
+                    COUNT(*) AS games_played 
+                FROM 
+                    ageofpirates_player AS p1 
+                    JOIN (
+                        SELECT 
+                            unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
+                            unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
+                            map_id 
+                        FROM 
+                            ageofpirates_match
+                    ) AS ma1 ON p1.id = ma1.player_id 
+                    JOIN (
+                        SELECT 
+                            unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
+                            unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
+                            map_id 
+                        FROM 
+                            ageofpirates_match
+                    ) AS ma2 ON ma1.map_id = ma2.map_id AND ma1.player_id != ma2.player_id AND ma1.p_team = ma2.p_team 
+                    JOIN ageofpirates_player AS p2 ON p2.id = ma2.player_id 
+                WHERE 
+                    p1.id = %s 
+                GROUP BY 
+                    p1.id, p2.id 
+                ORDER BY 
+                    p1.id, games_played DESC 
+                LIMIT 5;
+                '''
+            cursor.execute(sql_player_teammates, [self.object.id])
+            context['player_teammates'] = cursor.fetchall()
+            sql_player_enemies = '''
+                SELECT 
+                    p2.id AS enemy_id, p2.jmeno AS enemy_jmeno, 
+                    COUNT(*) AS games_played 
+                FROM 
+                    ageofpirates_player AS p1 
+                    JOIN (
+                        SELECT 
+                            unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
+                            unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
+                            map_id 
+                        FROM 
+                            ageofpirates_match
+                    ) AS ma1 ON p1.id = ma1.player_id 
+                    JOIN (
+                        SELECT 
+                            unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
+                            unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
+                            map_id 
+                        FROM 
+                            ageofpirates_match
+                    ) AS ma2 ON ma1.map_id = ma2.map_id AND ma1.player_id != ma2.player_id AND ma1.p_team != ma2.p_team 
+                    JOIN ageofpirates_player AS p2 ON p2.id = ma2.player_id 
+                WHERE 
+                    p1.id = %s 
+                GROUP BY 
+                    p1.id, p2.id 
+                ORDER BY 
+                    p1.id, games_played DESC 
+                LIMIT 5;
+                '''
+            cursor.execute(sql_player_enemies, [self.object.id])
+            context['player_enemies'] = cursor.fetchall()
             sql_player_map = '''
                 SELECT 
                     m.nazev AS map_nazev, 

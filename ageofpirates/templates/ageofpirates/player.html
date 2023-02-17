@@ -110,25 +110,25 @@
           <div class="card-body">
             <div class="row">
 
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <p class="mb-0">Nejhranější civilizace</p>
               </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-2">1. civka, 2. civka, 3. civka, 4. civka, 5. civka</p>
+              <div class="col-sm-9">
+                <p class="text-muted mb-2">{% for c in player_civs %}<a class="text-dark" href="/civ/{{ c.0 }}">{{ c.1 }}</a> ({{ c.2 }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}</p>
               </div>
               <hr>
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <p class="mb-0">Nejčastější spojenec</p>
               </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-2">1. hráč, 2. hráč, 3. hráč, 4. hráč, 5. hráč</p>
+              <div class="col-sm-9">
+                <p class="text-muted mb-2">{% for s in player_teammates %}<a class="text-dark" href="/player/{{ s.0 }}">{{ s.1 }}</a> ({{ s.2 }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}</p>
               </div>
               <hr>
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <p class="mb-0">Nejčastější nepřítel</p>
               </div>
-              <div class="col-sm-8">
-                <p class="text-muted mb-0">1. hráč, 2. hráč, 3. hráč, 4. hráč, 5. hráč</p>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{% for n in player_enemies %}<a class="text-dark" href="/player/{{ n.0 }}">{{ n.1 }}</a> ({{ n.2 }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}</p>
               </div>
 
             </div>
