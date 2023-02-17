@@ -32,9 +32,9 @@ class PlayerView(DetailView):
             sql_player_map = '''
                 SELECT 
                     m.nazev AS map_nazev, 
-                    COUNT(CASE WHEN ma.win = p_team THEN 1 ELSE NULL END) AS games_won, 
-                    COUNT(CASE WHEN ma.win != p_team THEN 1 ELSE NULL END) AS games_lost,
-                    COUNT(*) AS games_played
+                    COUNT(CASE WHEN ma.win = p_team THEN 1 ELSE NULL END) AS games_won,
+                    COUNT(CASE WHEN ma.win = p_team THEN 1 ELSE NULL END) * 100.0 / COUNT(*) AS games_won_percent,
+                    COUNT(CASE WHEN ma.win != p_team THEN 1 ELSE NULL END) AS games_lost    
                 FROM 
                     ageofpirates_player AS p
                     JOIN (
@@ -52,34 +52,34 @@ class PlayerView(DetailView):
                 GROUP BY 
                     p.id, m.id
                 ORDER BY 
-                    p.id, games_won DESC;
+                    p.id, games_won_percent DESC;
                 '''
             cursor.execute(sql_player_map, [self.object.id])
             context['player_map'] = cursor.fetchall()
             sql_player_civ = '''
-                            SELECT
-                                c.nazev AS civ_nazev, 
-                                COUNT(CASE WHEN ma.win = p_team THEN 1 ELSE NULL END) AS games_won, 
-                                COUNT(CASE WHEN ma.win != p_team THEN 1 ELSE NULL END) AS games_lost,
-                                COUNT(*) AS total_games
+                            SELECT 
+                                c.nazev AS civilization_nazev, 
+                                COUNT(CASE WHEN ma.win = ma.p_team THEN 1 ELSE NULL END) AS games_won,
+                                ROUND(100.0 * COUNT(CASE WHEN ma.win = ma.p_team THEN 1 ELSE NULL END) / COUNT(*), 2) AS games_won_percent,
+                                COUNT(CASE WHEN ma.win != ma.p_team THEN 1 ELSE NULL END) AS games_lost
                             FROM 
                                 ageofpirates_player AS p
                                 JOIN (
                                     SELECT 
                                         unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
                                         unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
-                                        unnest(array[p1_civ_id, p2_civ_id, p3_civ_id, p4_civ_id, p5_civ_id, p6_civ_id, p7_civ_id, p8_civ_id]) AS p_civ_id,
+                                        unnest(array[p1_civ_id, p2_civ_id, p3_civ_id, p4_civ_id, p5_civ_id, p6_civ_id, p7_civ_id, p8_civ_id]) AS civ_id,
                                         win
                                     FROM 
                                         ageofpirates_match
                                 ) AS ma ON p.id = ma.player_id 
-                                JOIN ageofpirates_civilization AS c ON c.id = ma.p_civ_id
+                                JOIN ageofpirates_civilization AS c ON c.id = ma.civ_id
                             WHERE 
                                 p.id = %s
                             GROUP BY 
                                 p.id, c.id
                             ORDER BY 
-                                p.id, games_won DESC;
+                                p.id, games_won_percent DESC;
                             '''
             cursor.execute(sql_player_civ, [self.object.id])
             context['player_civ'] = cursor.fetchall()
