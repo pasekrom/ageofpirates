@@ -58,37 +58,89 @@ class PlayerView(DetailView):
             cursor.execute(sql_player_civs, [self.object.id])
             context['player_civs'] = cursor.fetchall()
             sql_player_teammates = '''
-                SELECT 
-                    p2.id AS teammate_id, p2.jmeno AS teammate_jmeno, 
-                    COUNT(*) AS games_played 
-                FROM 
-                    ageofpirates_player AS p1 
-                    JOIN (
-                        SELECT 
-                            unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
-                            unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
-                            map_id 
-                        FROM 
-                            ageofpirates_match
-                    ) AS ma1 ON p1.id = ma1.player_id 
-                    JOIN (
-                        SELECT 
-                            unnest(array[p1_id, p2_id, p3_id, p4_id, p5_id, p6_id, p7_id, p8_id]) AS player_id, 
-                            unnest(array[p1_team, p2_team, p3_team, p4_team, p5_team, p6_team, p7_team, p8_team]) AS p_team, 
-                            map_id 
-                        FROM 
-                            ageofpirates_match
-                    ) AS ma2 ON ma1.map_id = ma2.map_id AND ma1.player_id != ma2.player_id AND ma1.p_team = ma2.p_team 
-                    JOIN ageofpirates_player AS p2 ON p2.id = ma2.player_id 
-                WHERE 
-                    p1.id = %s 
-                GROUP BY 
-                    p1.id, p2.id 
-                ORDER BY 
-                    p1.id, games_played DESC 
+                SELECT
+                  p2.id AS teammate_id,
+                  p2.jmeno AS teammate_name,
+                  COUNT(*) AS frequency
+                FROM
+                  ageofpirates_match m
+                  LEFT JOIN ageofpirates_player p1 ON m.p1_id = p1.id
+                  LEFT JOIN ageofpirates_player p2 ON m.p2_id = p2.id
+                  LEFT JOIN ageofpirates_player p3 ON m.p3_id = p3.id
+                  LEFT JOIN ageofpirates_player p4 ON m.p4_id = p4.id
+                  LEFT JOIN ageofpirates_player p5 ON m.p5_id = p5.id
+                  LEFT JOIN ageofpirates_player p6 ON m.p6_id = p6.id
+                  LEFT JOIN ageofpirates_player p7 ON m.p7_id = p7.id
+                  LEFT JOIN ageofpirates_player p8 ON m.p8_id = p8.id
+                WHERE (p1_id = %s OR
+                       p2_id = %s OR
+                       p3_id = %s OR
+                       p4_id = %s OR
+                       p5_id = %s OR
+                       p6_id = %s OR
+                       p7_id = %s OR
+                       p8_id = %s)
+                    AND ( 
+                  (
+                    m.p1_team = m.p2_team AND
+                    m.p1_id IS NOT NULL AND m.p2_id IS NOT NULL AND
+                    m.p1_id != m.p2_id
+                  ) OR (
+                    m.p1_team != m.p2_team AND
+                    m.p1_id IS NOT NULL AND m.p2_id IS NOT NULL AND
+                    m.p1_id != m.p2_id
+                  ) OR (
+                    m.p1_team = m.p3_team AND
+                    m.p1_id IS NOT NULL AND m.p3_id IS NOT NULL AND
+                    m.p1_id != m.p3_id
+                  ) OR (
+                    m.p1_team != m.p3_team AND
+                    m.p1_id IS NOT NULL AND m.p3_id IS NOT NULL AND
+                    m.p1_id != m.p3_id
+                  ) OR (
+                    m.p1_team = m.p4_team AND
+                    m.p1_id IS NOT NULL AND m.p4_id IS NOT NULL AND
+                    m.p1_id != m.p4_id
+                  ) OR (
+                    m.p1_team != m.p4_team AND
+                    m.p1_id IS NOT NULL AND m.p4_id IS NOT NULL AND
+                    m.p1_id != m.p4_id
+                  ) OR (
+                    m.p1_team = m.p5_team AND
+                    m.p1_id IS NOT NULL AND m.p5_id IS NOT NULL AND
+                    m.p1_id != m.p5_id
+                  ) OR (
+                    m.p1_team != m.p5_team AND
+                    m.p1_id IS NOT NULL AND m.p5_id IS NOT NULL AND
+                    m.p1_id != m.p5_id
+                  ) OR (
+                    m.p1_team = m.p6_team AND
+                    m.p1_id IS NOT NULL AND m.p6_id IS NOT NULL AND
+                    m.p1_id != m.p6_id
+                  ) OR (
+                    m.p1_team != m.p6_team AND
+                    m.p1_id IS NOT NULL AND m.p6_id IS NOT NULL AND
+                    m.p1_id != m.p6_id
+                  ) OR (
+                    m.p1_team = m.p7_team AND
+                    m.p1_id IS NOT NULL AND m.p7_id IS NOT NULL AND
+                    m.p1_id != m.p7_id
+                  ) OR (
+                    m.p1_team != m.p7_team AND
+                    m.p1_id IS NOT NULL AND m.p7_id IS NOT NULL AND
+                    m.p1_id != m.p7_id
+                  ) OR (
+                    m.p1_team = m.p8_team AND
+                    m.p1_id IS NOT NULL AND m.p8_id IS NOT NULL AND
+                    m.p1_id != m.p8_id)
+                    )
+                GROUP BY
+                  p2.id, p2.jmeno
+                ORDER BY
+                  frequency DESC
                 LIMIT 5;
                 '''
-            cursor.execute(sql_player_teammates, [self.object.id])
+            cursor.execute(sql_player_teammates, [self.object.id, self.object.id, self.object.id, self.object.id, self.object.id, self.object.id, self.object.id, self.object.id])
             context['player_teammates'] = cursor.fetchall()
             sql_player_enemies = '''
                 SELECT 
